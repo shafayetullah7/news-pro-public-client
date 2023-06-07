@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
+import avatar from '../../../assets/user.jpg';
+import { Tooltip } from "@mui/material";
 
 const Nav = () => {
+    const {user,loading} = useAuth();
+
     const navItems = <>
         <li><Link to={'/'}>Home</Link></li>
         <li><Link>Instructors</Link></li>
@@ -26,7 +31,14 @@ const Nav = () => {
             </ul>
         </div>
         <div className="navbar-end">
-            <Link to='/login' className="bg-primary text-white px-5 py-3 rounded-md font-bold text-sm hover:bg-white border-2 border-primary hover:text-primary duration-100 cursor-pointer font-merri normal-case tracking-widest">Login</Link>
+            {!loading && <div>
+                {!user && <Link to='/login' className="bg-primary text-white px-5 py-3 rounded-md font-bold text-sm hover:bg-white border-2 border-primary hover:text-primary duration-100 cursor-pointer font-merri normal-case tracking-widest">Login</Link>}
+            {user && <div className="w-fit h-fit">
+                <Tooltip title={user.displayName} placement="left-start">
+                    <img className="w-14 h-14 rounded-full border-2 object-cover object-center cursor-pointer" src={user.photoURL || avatar} alt="" />
+                </Tooltip>
+                </div>}
+        </div>}
         </div>
         </div>
     );

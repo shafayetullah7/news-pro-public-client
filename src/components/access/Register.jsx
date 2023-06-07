@@ -5,13 +5,23 @@ import loginImg from '../../assets/loginImg.json'
 import Lottie from "lottie-react";
 import { Link } from 'react-router-dom';
 import SocialAccess from './SocialAccess';
+import { Helmet } from 'react-helmet-async';
+import useAuth from '../../hooks/useAuth';
 
 const Register = () => {
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
 
+  const {createUser,updateUser} = useAuth();
   const onSubmit = (data) => {
     // Handle registration logic here
     console.log(data);
+    const userData = {...data,type:'student'};
+    createUser(data.email,data.password)
+    .then(result=>{
+        console.log(result);
+        updateUser(data.name,data.photoUrl);
+    })
+
   };
 
   const password = watch('password');
@@ -41,6 +51,10 @@ const Register = () => {
 
   return (
     <div>
+        <Helmet>
+            <title>NewsPro | Register</title>
+        </Helmet>
+
         <div className="flex flex-col md:flex-row">
             <div className="w-full flex items-center justify-center">
             <Lottie animationData={loginImg} />
