@@ -1,11 +1,13 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
-import { TextField, Button, Link, IconButton, InputAdornment } from '@mui/material';
+import { TextField, Button, IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 import loginImg from '../../assets/loginImg.json'
 import Lottie from "lottie-react";
+import { Link } from "react-router-dom";
+import SocialAccess from "./SocialAccess";
 
 
 const Login = () => {
@@ -67,8 +69,9 @@ const Login = () => {
                             </Button>
                         </form>
                         <p className="mt-4">
-                            Don't have an account? <Link href="/register">Register here</Link>
+                            Don't have an account? <Link className="text-[#002147] underline hover:font-bold" to={'/register'} replace={true}>Register Now</Link>
                         </p>
+                        <SocialAccess></SocialAccess>
                     </div>
                 </div>
             </div>
