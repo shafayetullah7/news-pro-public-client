@@ -1,5 +1,4 @@
-import { Helmet } from "react-helmet";
-import Nav from "../../shared/nav/Nav";
+import { Helmet } from "react-helmet-async";
 import Carousel from "./Carousel";
 
 const Home = () => {
@@ -8,7 +7,7 @@ const Home = () => {
             <Helmet>
                 <title>NewsPro | Home</title>
             </Helmet>
-            <Nav></Nav>
+            
             <div>
                 <Carousel></Carousel>
             </div>
