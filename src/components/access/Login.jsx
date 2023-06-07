@@ -1,19 +1,25 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
-import { TextField, Button, IconButton, InputAdornment } from '@mui/material';
+import { TextField, Button, IconButton, InputAdornment, Alert } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 import loginImg from '../../assets/loginImg.json'
 import Lottie from "lottie-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialAccess from "./SocialAccess";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+import { ToastContainer, toast } from "react-toastify";
 
 
 const Login = () => {
 
+    const {loginUser} = useAuth();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleShowPassword = () => {
         setShowPassword(!showPassword);
@@ -22,6 +28,14 @@ const Login = () => {
     const onSubmit = (data) => {
         // Handle login logic here
         console.log(data);
+        loginUser(data.email,data.password)
+        .then(result=>{
+            console.log(result);
+            Swal.fire('','Logged In','success')
+
+            navigate('/',{replace:true});
+            
+        })
     };
     return (
         <div>
@@ -68,7 +82,7 @@ const Login = () => {
                             Login
                             </Button>
                         </form>
-                        <p className="mt-4">
+                        <p className="mt-4 text-sm">
                             Don't have an account? <Link className="text-[#002147] underline hover:font-bold" to={'/register'} replace={true}>Register Now</Link>
                         </p>
                         <SocialAccess></SocialAccess>

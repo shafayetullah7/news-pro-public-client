@@ -7,8 +7,16 @@ import { MdOutlineDashboard } from "react-icons/md";
 import { AiOutlineLogout } from "react-icons/ai";
 
 const Nav = () => {
-    const {user,loading} = useAuth();
+    const {user,loading,logoutUser} = useAuth();
     const [drawerOpen,setdrawerOpen] = useState(false);
+
+    const logout = ()=>{
+        logoutUser()
+        .then(()=>{
+            console.log('logged out')
+            setdrawerOpen(false);
+        })
+    }
 
     const navItems = <>
         <li><Link to={'/'}>Home</Link></li>
@@ -46,17 +54,17 @@ const Nav = () => {
         </div>
         <Drawer anchor="right" open={drawerOpen} onClose={()=>setdrawerOpen(false)}>
                 <div className="p-8">
-                    <div className="bg-base-100">
+                    <div className="bg-base-100 text-primary">
                         <div className="flex gap-5 items-center min-w-[250px] bg-primary bg-opacity-10 p-2 rounded-lg cursor-pointer hover:scale-105 duration-100 shadow-lg">
                             <img className="w-12 h-12 rounded-full border-2 border-primary object-cover object-center cursor-pointer" src={user?.photoURL || avatar} alt="" />  
-                            <p className="font-bold">{user?.displayName}</p>
+                            <p className="font-bold font-merri">{user?.displayName}</p>
                         </div>
                         <div>
-                            <div className="flex mx-2 mt-10 hover:bg-gray-200 rounded-lg p-2 duration-100 cursor-pointer gap-3 items-center font-bold">
+                            <div className="flex mx-2 mt-10 hover:bg-gray-200 rounded-lg p-2 duration-100 cursor-pointer gap-3 items-center font-bold font-merri text-sm">
                                 <MdOutlineDashboard className="text-2xl"></MdOutlineDashboard>
                                 <p>Dashboard</p>
                             </div>
-                            <div className="flex mx-2 hover:bg-gray-200 rounded-lg p-2 duration-100 cursor-pointer gap-3 items-center font-bold">
+                            <div className="flex mx-2 hover:bg-gray-200 rounded-lg p-2 duration-100 cursor-pointer gap-3 items-center font-bold font-merri text-sm" onClick={logout}>
                                 <AiOutlineLogout className="text-2xl"></AiOutlineLogout>
                                 <p>Logout</p>
                             </div>

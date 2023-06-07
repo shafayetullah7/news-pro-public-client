@@ -27,12 +27,9 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth,googleProvider);
     }
     const updateUser = (name,imgurl) =>{
-        updateProfile(auth.currentUser,{
+        return updateProfile(auth.currentUser,{
             displayName:name,
             photoURL:imgurl
-        })
-        .then(result=>{
-            console.log(result);
         })
     }
 
