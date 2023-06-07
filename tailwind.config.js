@@ -5,7 +5,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        merri:['Merriweather', 'serif'],
+        abril:['Abril Fatface', 'cursive']
+      },
+      colors:{
+        primary:'#002147',
+      }
+    },
   },
   plugins: [require("daisyui")],
 }
