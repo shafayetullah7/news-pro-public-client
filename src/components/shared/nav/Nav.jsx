@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import avatar from '../../../assets/user.jpg';
-import { Tooltip } from "@mui/material";
+import { Drawer, Tooltip } from "@mui/material";
+import { useState } from "react";
+import { MdOutlineDashboard } from "react-icons/md";
+import { AiOutlineLogout } from "react-icons/ai";
 
 const Nav = () => {
     const {user,loading} = useAuth();
+    const [drawerOpen,setdrawerOpen] = useState(false);
 
     const navItems = <>
         <li><Link to={'/'}>Home</Link></li>
@@ -33,14 +37,34 @@ const Nav = () => {
         <div className="navbar-end">
             {!loading && <div>
                 {!user && <Link to='/login' className="bg-primary text-white px-5 py-3 rounded-md font-bold text-sm hover:bg-white border-2 border-primary hover:text-primary duration-100 cursor-pointer font-merri normal-case tracking-widest">Login</Link>}
-            {user && <div className="w-fit h-fit">
+            {user && <div className="w-fit h-fit" onClick={()=>setdrawerOpen(true)}>
                 <Tooltip title={user.displayName} placement="left-start">
-                    <img className="w-14 h-14 rounded-full border-2 object-cover object-center cursor-pointer" src={user.photoURL || avatar} alt="" />
+                    <img className="w-14 h-14 rounded-full border-2 object-cover object-center cursor-pointer" src={user?.photoURL || avatar} alt="" />
                 </Tooltip>
                 </div>}
-        </div>}
+            </div>}
         </div>
-        </div>
+        <Drawer anchor="right" open={drawerOpen} onClose={()=>setdrawerOpen(false)}>
+                <div className="p-8">
+                    <div className="bg-base-100">
+                        <div className="flex gap-5 items-center min-w-[250px] bg-primary bg-opacity-10 p-2 rounded-lg cursor-pointer hover:scale-105 duration-100 shadow-lg">
+                            <img className="w-12 h-12 rounded-full border-2 border-primary object-cover object-center cursor-pointer" src={user?.photoURL || avatar} alt="" />  
+                            <p className="font-bold">{user?.displayName}</p>
+                        </div>
+                        <div>
+                            <div className="flex mx-2 mt-10 hover:bg-gray-200 rounded-lg p-2 duration-100 cursor-pointer gap-3 items-center font-bold">
+                                <MdOutlineDashboard className="text-2xl"></MdOutlineDashboard>
+                                <p>Dashboard</p>
+                            </div>
+                            <div className="flex mx-2 hover:bg-gray-200 rounded-lg p-2 duration-100 cursor-pointer gap-3 items-center font-bold">
+                                <AiOutlineLogout className="text-2xl"></AiOutlineLogout>
+                                <p>Logout</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </Drawer>
+    </div>
     );
 };
 
