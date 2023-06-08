@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import {
   Grid,
@@ -12,7 +11,7 @@ import {
 } from '@mui/material';
 
 const AddClass = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -37,13 +36,7 @@ const AddClass = () => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
-                {...register('classImage', { required: true })}
-                label="Class Image"
-                variant="outlined"
-                fullWidth
-                required
-              />
+              <input type="file" {...register('classImage', { required: true })} />
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl>
@@ -71,26 +64,44 @@ const AddClass = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                {...register('availableSeats', { required: true })}
+                {...register('availableSeats', {
+                  required: true,
+                  pattern: {
+                    value: /^[1-9]\d*$/,
+                    message: 'Available Seats must be a positive number',
+                  },
+                })}
                 label="Available Seats"
                 variant="outlined"
                 fullWidth
                 required
+                error={!!errors.availableSeats}
+                helperText={errors.availableSeats?.message}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                {...register('price', { required: true })}
+                {...register('price', {
+                  required: true,
+                  pattern: {
+                    value: /^\d+(\.\d{1,2})?$/,
+                    message: 'Price must be a valid float with up to 2 decimal places',
+                  },
+                })}
                 label="Price"
                 variant="outlined"
                 fullWidth
                 required
+                error={!!errors.price}
+                helperText={errors.price?.message}
               />
             </Grid>
+            <Grid item xs={12}>
+              <Button type="submit" variant="contained" color="primary" fullWidth>
+                Add
+              </Button>
+            </Grid>
           </Grid>
-          <Button type="submit" variant="contained" color="primary" fullWidth>
-            Add
-          </Button>
         </form>
       </Box>
     </Container>
