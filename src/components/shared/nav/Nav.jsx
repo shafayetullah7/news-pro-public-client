@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import avatar from '../../../assets/user.jpg';
 import { Tooltip } from "@mui/material";
@@ -9,6 +9,7 @@ import { AiOutlineLogout } from "react-icons/ai";
 const Nav = () => {
     const {user,loading,logoutUser} = useAuth();
     // const [drawerOpen,setdrawerOpen] = useState(false);
+    const navigate = useNavigate();
     const [theme,setTheme] = useState(localStorage.getItem('theme')?localStorage.getItem('theme'):'light');
 
     useEffect(()=>{
@@ -88,7 +89,7 @@ const Nav = () => {
                             <p className="font-bold font-merri">{user?.displayName}</p>
                         </div>
                         <div className="bg-transparent">
-                            <div className="flex mx-2 mt-10 hover:bg-gray-200 rounded-lg p-2 duration-100 cursor-pointer gap-3 items-center font-bold font-merri text-sm">
+                            <div className="flex mx-2 mt-10 hover:bg-gray-200 rounded-lg p-2 duration-100 cursor-pointer gap-3 items-center font-bold font-merri text-sm" onClick={()=>navigate('/dashboard')}>
                                 <MdOutlineDashboard className="text-2xl"></MdOutlineDashboard>
                                 <p>Dashboard</p>
                             </div>
