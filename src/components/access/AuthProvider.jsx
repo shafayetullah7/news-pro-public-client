@@ -12,7 +12,6 @@ const AuthProvider = ({children}) => {
     const [loading,setLoading] = useState(true);
 
     const googleProvider = new GoogleAuthProvider();
-
     const auth = getAuth(app);
 
     const createUser = (email,password) =>{
@@ -46,13 +45,13 @@ const AuthProvider = ({children}) => {
     
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser)
             if (currentUser) {
                 console.log(currentUser);
                 axios.post('http://localhost:5000/jwt',{email:currentUser.email})
                 .then(data=>{
                     console.log(data.data);
                     localStorage.setItem('news-pro-token',data.data.token)
-                    setUser(currentUser)
                 })
             } else {
               setUser(null);

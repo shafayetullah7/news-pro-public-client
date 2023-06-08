@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { Button, Radio, RadioGroup, FormControlLabel, FormLabel, Grid, TextField } from '@mui/material';
+import { Button, Radio, RadioGroup, FormControlLabel, FormLabel, Grid, TextField, FormControl } from '@mui/material';
 
 import loginImg from '../../assets/loginImg.json'
 import Lottie from "lottie-react";
@@ -9,18 +9,21 @@ import { Helmet } from 'react-helmet-async';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hooks/useAxios';
-import axios from 'axios';
+// import axios from 'axios';
 
 const Register = () => {
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
   const navigate = useNavigate();
   const {createUser,updateUser} = useAuth();
   const [axiosSecure] = useAxiosSecure();
+  
 
   const onSubmit = (data) => {
     // Handle registration logic here
     console.log(data);
     const userData = {...data,type:'student'};
+    delete userData.password;
+    delete userData.confirmPassword;
 
     createUser(data.email,data.password)
     .then(result=>{
@@ -32,7 +35,7 @@ const Register = () => {
             .then(data=>{
                 console.log(data);
                 Swal.fire('','Logged In','success')
-                // navigate('/',{replace:true});
+                navigate('/',{replace:true});
             })
             .catch(err=>{
                 console.log(err);
@@ -46,17 +49,11 @@ const Register = () => {
         console.log(err);
     })
 
-    // axiosSecure.post('/users',userData)
-    // .then(data=>{
-    //     console.log(data);
-    //     // Swal.fire('','Logged In','success')
-    //     // navigate('/',{replace:true});
-    // })
-    .catch(err=>{
-        console.log(err);
-    })
-
   };
+
+  const onError = (errors) =>{
+    console.log('errors : ',errors);
+  }
 
   const password = watch('password');
 //   const confirmPassword = watch('confirmPassword');
@@ -96,7 +93,7 @@ const Register = () => {
             <div className='w-full flex justify-center items-center mt-5'>
                 <div className="max-w-[400px] mx-auto p-8 bg-[#002147] bg-opacity-5 dark:bg-gray-400 rounded-xl">
                     <h2 className="text-4xl mb-4 font-merri text-[#002147] font-bold text-center">Create New Account</h2>
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-10">
+                    <form onSubmit={handleSubmit(onSubmit,onError)} className="space-y-4 mt-10">
                         <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
@@ -160,14 +157,19 @@ const Register = () => {
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <FormLabel component="legend" className="text-[#002147] font-bold">
-                            Gender
+                        <FormControl>
+                            <FormLabel component="legend" id="demo-radio-buttons-group-label">
+                                Gender
                             </FormLabel>
-                            <RadioGroup {...register('gender', { required: true })}>
-                            <FormControlLabel value="male" control={<Radio />} label="Male" />
-                            <FormControlLabel value="female" control={<Radio />} label="Female" />
-                            <FormControlLabel value="other" control={<Radio />} label="Other" />
+                            <RadioGroup
+                                aria-label="gender"
+                                name="gender"
+                            >
+                                <FormControlLabel value="female" control={<Radio />} {...register('gender')} label="Female" />
+                                <FormControlLabel value="male" control={<Radio />} {...register('gender')} label="Male" />
+                                <FormControlLabel value="other" control={<Radio />} {...register('gender')} label="Other" />
                             </RadioGroup>
+                            </FormControl>
                         </Grid>
                         
                         <Grid item xs={12} sm={6}>
