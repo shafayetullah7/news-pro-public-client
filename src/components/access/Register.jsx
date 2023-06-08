@@ -8,25 +8,52 @@ import SocialAccess from './SocialAccess';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../hooks/useAxios';
+import axios from 'axios';
 
 const Register = () => {
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
   const navigate = useNavigate();
   const {createUser,updateUser} = useAuth();
+  const [axiosSecure] = useAxiosSecure();
 
   const onSubmit = (data) => {
     // Handle registration logic here
     console.log(data);
     const userData = {...data,type:'student'};
+
     createUser(data.email,data.password)
     .then(result=>{
         console.log(result);
         updateUser(data.name,data.photoUrl)
-        .then(result=>{
-            console.log(result);
-            Swal.fire('','Logged In','success')
-            navigate('/',{replace:true});
+        .then(()=>{
+            // axios.post('http://localhost:5000/users',userData)
+            axiosSecure.post('/users',userData)
+            .then(data=>{
+                console.log(data);
+                Swal.fire('','Logged In','success')
+                // navigate('/',{replace:true});
+            })
+            .catch(err=>{
+                console.log(err);
+            })
         })
+        .catch(err=>{
+            console.log(err);
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+
+    // axiosSecure.post('/users',userData)
+    // .then(data=>{
+    //     console.log(data);
+    //     // Swal.fire('','Logged In','success')
+    //     // navigate('/',{replace:true});
+    // })
+    .catch(err=>{
+        console.log(err);
     })
 
   };
