@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { Button, Radio, RadioGroup, FormControlLabel, FormLabel, Grid, TextField, Alert } from '@mui/material';
+import { Button, Radio, RadioGroup, FormControlLabel, FormLabel, Grid, TextField } from '@mui/material';
 
 import loginImg from '../../assets/loginImg.json'
 import Lottie from "lottie-react";
@@ -62,12 +62,12 @@ const Register = () => {
             <title>NewsPro | Register</title>
         </Helmet>
 
-        <div className="flex flex-col md:flex-row">
+        <div className="flex flex-col md:flex-row dark:bg-gray-700">
             <div className="w-full flex items-center justify-center">
             <Lottie animationData={loginImg} />
             </div>
-            <div className='w-full flex justify-center items-center'>
-                <div className="max-w-[400px] mx-auto p-8 bg-[#002147] bg-opacity-5 rounded-xl">
+            <div className='w-full flex justify-center items-center mt-5'>
+                <div className="max-w-[400px] mx-auto p-8 bg-[#002147] bg-opacity-5 dark:bg-gray-400 rounded-xl">
                     <h2 className="text-4xl mb-4 font-merri text-[#002147] font-bold text-center">Create New Account</h2>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-10">
                         <Grid container spacing={2}>

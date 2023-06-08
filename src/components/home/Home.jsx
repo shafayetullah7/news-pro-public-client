@@ -11,6 +11,7 @@ const Home = () => {
             <div>
                 <Carousel></Carousel>
             </div>
+            <div className="h-screen"></div>
         </div>
     );
 };

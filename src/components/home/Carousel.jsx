@@ -34,7 +34,7 @@ const Carousel = () => {
                 <SwiperSlide>
                     <div className="relative h-screen w-full">
                     <img className="w-full h-full object-cover object-center" src={courses} alt="Banner 1" />
-                    <div className="absolute inset-0 flex flex-col justify-center items-center bg-primary bg-opacity-70 text-white p-8">
+                    <div className="absolute inset-0 flex flex-col justify-center items-center bg-primary  bg-opacity-70 text-white p-8">
                         <h2 className="text-8xl w-3/4 text-center font-abril">Explore Exciting News Presenter Courses</h2>
                         <p className="text-lg text-center w-3/4 font-merri text-gray-400 mt-12">Enroll in our summer camp and discover a range of courses designed to equip you with the skills needed to become a news presenter. From voice modulation to on-camera presence, our comprehensive curriculum will help you excel in this exciting field.</p>
                         <button className="px-6 py-3 border-2 text-white text-xl font-bold mt-10">Popular Courses</button>

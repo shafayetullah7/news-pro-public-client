@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
-import { TextField, Button, IconButton, InputAdornment, Alert } from '@mui/material';
+import { TextField, Button, IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 import loginImg from '../../assets/loginImg.json'
@@ -10,7 +10,6 @@ import { Link, useNavigate } from "react-router-dom";
 import SocialAccess from "./SocialAccess";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import { ToastContainer, toast } from "react-toastify";
 
 
 const Login = () => {
@@ -43,14 +42,14 @@ const Login = () => {
                 <title>NewsPro | Login</title>
             </Helmet>
 
-            <div className="flex flex-col md:flex-row">
+            <div className="flex flex-col md:flex-row dark:bg-gray-700">
                 <div className="w-full flex items-center justify-center">
                 <Lottie animationData={loginImg} />
                 </div>
 
                 <div className="w-full flex justify-center items-center">
-                    <div className="flex flex-col items-center max-w-[400px] bg-[#002147] bg-opacity-5 px-10 py-20 rounded-xl">
-                        <h2 className="text-4xl mb-4 font-merri text-[#002147] font-bold text-center">Login to Your Account</h2>
+                    <div className="flex flex-col items-center max-w-[400px] bg-[#002147] bg-opacity-5 dark:bg-gray-400 px-10 py-20 rounded-xl">
+                        <h2 className="text-4xl mb-4 font-merri text-primary font-bold text-center">Login to Your Account</h2>
                         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-10">
                             <TextField
                             {...register('email', { required: true })}
