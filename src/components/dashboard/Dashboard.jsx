@@ -74,7 +74,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-full md:col-span-4">
+                <div className="w-full md:col-span-4 bg-admin bg-opacity-10">
                     <div className="mt-9">
                         <Outlet></Outlet>
                     </div>

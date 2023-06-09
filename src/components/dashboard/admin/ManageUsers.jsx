@@ -9,36 +9,47 @@ const ManageUsers = () => {
 
     const [axiosSecure] = useAxiosSecure();
     const changeType = (email,type) =>{
-        Swal.fire(
-            'Processing request',
-          )
         const data = {
             type: type,
             email: email,
         };
-        axiosSecure.put('/type',data)
-        .then(res=>{
-            console.log(res);
-            Swal.fire(
-                'User updated',
-                '',
-                'success'
-              )
-            refetch();
-        })
-        .catch(err=>{
-            console.log(err);
-        })
+        Swal.fire({
+            title: 'Are you sure?',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                axiosSecure.put('/type',data)
+                .then(res=>{
+                    console.log(res);
+                    Swal.fire(
+                        'User updated',
+                        '',
+                        'success'
+                      )
+                    refetch();
+                })
+                .catch(err=>{
+                    console.log(err);
+                })
+            } 
+          })
+        
     }
 
 
     return (
-        <div>
+        <div >
+            <div className="flex justify-between items-center border-b border-b-admin px-5">
+                <p className="text-3xl font-bold pb-2 text-admin">Manage Users</p>
+
+            </div>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
                     <thead>
-                    <tr>
+                    <tr className="dark:text-white">
                         <th>
                         <label>
                             #
@@ -63,12 +74,12 @@ const ManageUsers = () => {
                                         </div>
                                         </div>
                                         <div>
-                                        <div className="font-bold">{user.name}</div>
-                                        <div className="text-sm opacity-50">{user.type || 'Unknown type'}</div>
+                                        <div className="font-bold dark:text-white">{user.name}</div>
+                                        <div className="text-sm opacity-50 dark:text-white">{user.type || 'Unknown type'}</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td>{user.email}</td>
+                                <td className="dark:text-white">{user.email}</td>
                                 <td>
                                     <div className="flex items-center justify-start flex-wrap gap-2">
                                         <button className={`border border-admin bg-admin active:scale-95 duration-100 ${user?.type==='admin' && 'bg-opacity-70'} text-xs px-3 py-2 rounded-md font-bold text-white`} disabled={user?.type==='admin'} onClick={()=>changeType(user.email,'admin')}>Make Admin</button>

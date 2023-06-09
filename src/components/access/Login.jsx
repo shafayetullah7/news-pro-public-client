@@ -20,6 +20,8 @@ const Login = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname;
 
+    const [error,setError] = useState('');
+
     const navigate = useNavigate();
 
     const handleShowPassword = () => {
@@ -28,6 +30,7 @@ const Login = () => {
 
     const onSubmit = (data) => {
         // Handle login logic here
+        setError('');
         console.log(data);
         loginUser(data.email,data.password)
         .then(result=>{
@@ -36,6 +39,10 @@ const Login = () => {
 
             navigate(from || '/',{replace:true});
             
+        })
+        .catch(err=>{
+            console.log(err);
+            setError('Failed to login!')
         })
     };
     return (
@@ -79,12 +86,13 @@ const Login = () => {
                                 ),
                             }}
                             />
+                            {error && <p className="text-xs text-red-600">{error}</p>}
                             <Button type="submit" variant="contained" color="primary" fullWidth style={{ backgroundColor: '#002147' }}>
                             Login
                             </Button>
                         </form>
                         <p className="mt-4 text-sm">
-                            Don't have an account? <Link className="text-[#002147] underline hover:font-bold" to={'/register'} state={{from:location.state.from}} replace={true}>Register Now</Link>
+                            Don't have an account? <Link className="text-[#002147] underline hover:font-bold" to={'/register'} state={{from:location.state?.from}} replace={true}>Register Now</Link>
                         </p>
                         <SocialAccess></SocialAccess>
                     </div>

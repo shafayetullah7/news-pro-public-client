@@ -187,7 +187,7 @@ const Register = () => {
                         </Grid>
                         <Button type="submit" variant="contained" color="primary" fullWidth style={{ backgroundColor: '#002147' }}>Register</Button>
                     </form>
-                    <p className="mt-4 text-center text-sm">Already have an account? <Link className="text-[#002147] underline hover:font-bold" to={'/login'} state={{from:location.state.from}} replace={true}>Login</Link></p>
+                    <p className="mt-4 text-center text-sm">Already have an account? <Link className="text-[#002147] underline hover:font-bold" to={'/login'} state={{from:location.state?.from}} replace={true}>Login</Link></p>
                     <SocialAccess></SocialAccess>
                 </div> 
             </div>

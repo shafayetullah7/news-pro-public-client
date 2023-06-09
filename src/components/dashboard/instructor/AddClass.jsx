@@ -1,17 +1,20 @@
 import { useForm } from 'react-hook-form';
 import {
-  Grid,
-  TextField,
-  Button,
-  Typography,
-  Box,
-  Container,
-  FormControl,
-  FormLabel,
+Grid,
+TextField,
+Button,
+Typography,
+Box,
+Container,
+FormControl,
+FormLabel,
 } from '@mui/material';
+import useProfile from '../../../hooks/useProfile';
 
 const AddClass = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  // const {data:profile} = useProfile();
+  // console.log(profile)
 
   const onSubmit = (data) => {
     console.log(data);
@@ -101,8 +104,8 @@ const AddClass = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="primary" fullWidth>
-                Add
+              <Button type="submit" variant="contained" color="primary" fullWidth style={{backgroundColor: '#C38154',color: 'black',fontWeight:'bold',textTransform:'capitalize'}}>
+                Create Class
               </Button>
             </Grid>
           </Grid>
