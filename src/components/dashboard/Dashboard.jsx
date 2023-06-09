@@ -30,6 +30,18 @@ const Dashboard = () => {
     </>
 
     const adminMenu = <>
+        <Link to={'/dashboard/addClass'}>
+        <div className="flex gap-3 items-center border-b w-[120px]">
+            <Class></Class>
+            <p>Manage Classes</p>
+        </div>
+        </Link>
+        <Link>
+        <div className="flex gap-3 items-center border-b w-[120px]">
+            <SiGoogleclassroom className="text-xl"></SiGoogleclassroom>
+            <p>Manage Users</p>
+        </div>
+        </Link>
     </>
     return (
         

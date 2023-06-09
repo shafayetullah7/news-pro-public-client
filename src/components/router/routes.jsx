@@ -5,8 +5,11 @@ import Home from "../home/Home";
 import Login from "../access/Login";
 import Register from "../access/Register";
 import Dashboard from "../dashboard/Dashboard";
-import AddClass from "../dashboard/AddClass";
+import AddClass from "../dashboard/instructor/AddClass";
 import PrivateRoute from "../access/PrivateRoute";
+import InstructorOnly from "../access/InstructorOnly";
+import AdminOnly from "../access/AdminOnly";
+import ManageUsers from "../dashboard/admin/ManageUsers";
 
 
 
@@ -34,7 +37,11 @@ const routes = createBrowserRouter([
                 children:[
                     {
                         path:'addClass',
-                        element:<AddClass></AddClass>
+                        element:<PrivateRoute><InstructorOnly><AddClass></AddClass></InstructorOnly></PrivateRoute>
+                    },
+                    {
+                        path:'manageUsers',
+                        element:<PrivateRoute><AdminOnly><ManageUsers></ManageUsers></AdminOnly></PrivateRoute>
                     }
                 ]
             }
