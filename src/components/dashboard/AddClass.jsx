@@ -36,7 +36,11 @@ const AddClass = () => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <input type="file" {...register('classImage', { required: true })} />
+              <input
+                type="file"
+                accept="image/*"
+                {...register('classImage', { required: true })}
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl>
@@ -62,7 +66,7 @@ const AddClass = () => {
                 />
               </FormControl>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 {...register('availableSeats', {
                   required: true,
@@ -79,7 +83,7 @@ const AddClass = () => {
                 helperText={errors.availableSeats?.message}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 {...register('price', {
                   required: true,

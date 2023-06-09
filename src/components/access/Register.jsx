@@ -3,7 +3,7 @@ import { Button, Radio, RadioGroup, FormControlLabel, FormLabel, Grid, TextField
 
 import loginImg from '../../assets/loginImg.json'
 import Lottie from "lottie-react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialAccess from './SocialAccess';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../../hooks/useAuth';
@@ -12,13 +12,15 @@ import useAxiosSecure from '../../hooks/useAxios';
 // import axios from 'axios';
 
 const Register = () => {
-  const { register, handleSubmit, formState: { errors }, watch } = useForm();
-  const navigate = useNavigate();
-  const {createUser,updateUser} = useAuth();
-  const [axiosSecure] = useAxiosSecure();
+    const { register, handleSubmit, formState: { errors }, watch } = useForm();
+    const navigate = useNavigate();
+    const {createUser,updateUser} = useAuth();
+    const [axiosSecure] = useAxiosSecure();
+    const location = useLocation();
+    const from = location.state?.from?.pathname;
   
 
-  const onSubmit = (data) => {
+    const onSubmit = (data) => {
     // Handle registration logic here
     console.log(data);
     const userData = {...data,type:'student'};
@@ -35,7 +37,7 @@ const Register = () => {
             .then(data=>{
                 console.log(data);
                 Swal.fire('','Logged In','success')
-                navigate('/',{replace:true});
+                navigate(from || '/',{replace:true});
             })
             .catch(err=>{
                 console.log(err);
@@ -185,7 +187,7 @@ const Register = () => {
                         </Grid>
                         <Button type="submit" variant="contained" color="primary" fullWidth style={{ backgroundColor: '#002147' }}>Register</Button>
                     </form>
-                    <p className="mt-4 text-center text-sm">Already have an account? <Link className="text-[#002147] underline hover:font-bold" to={'/login'} replace={true}>Login</Link></p>
+                    <p className="mt-4 text-center text-sm">Already have an account? <Link className="text-[#002147] underline hover:font-bold" to={'/login'} state={{from:location.state.from}} replace={true}>Login</Link></p>
                     <SocialAccess></SocialAccess>
                 </div> 
             </div>

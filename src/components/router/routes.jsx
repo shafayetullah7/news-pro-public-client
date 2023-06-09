@@ -6,6 +6,9 @@ import Login from "../access/Login";
 import Register from "../access/Register";
 import Dashboard from "../dashboard/Dashboard";
 import AddClass from "../dashboard/AddClass";
+import PrivateRoute from "../access/PrivateRoute";
+
+
 
 const routes = createBrowserRouter([
     {
@@ -27,7 +30,7 @@ const routes = createBrowserRouter([
             },
             {
                 path:'dashboard',
-                element:<Dashboard></Dashboard>,
+                element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
                 children:[
                     {
                         path:'addClass',

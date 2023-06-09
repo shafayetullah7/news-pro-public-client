@@ -6,7 +6,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 import loginImg from '../../assets/loginImg.json'
 import Lottie from "lottie-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialAccess from "./SocialAccess";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
@@ -17,6 +17,8 @@ const Login = () => {
     const {loginUser} = useAuth();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
+    const location = useLocation();
+    const from = location.state?.from?.pathname;
 
     const navigate = useNavigate();
 
@@ -32,7 +34,7 @@ const Login = () => {
             console.log(result);
             Swal.fire('','Logged In','success')
 
-            navigate('/',{replace:true});
+            navigate(from || '/',{replace:true});
             
         })
     };
@@ -82,7 +84,7 @@ const Login = () => {
                             </Button>
                         </form>
                         <p className="mt-4 text-sm">
-                            Don't have an account? <Link className="text-[#002147] underline hover:font-bold" to={'/register'} replace={true}>Register Now</Link>
+                            Don't have an account? <Link className="text-[#002147] underline hover:font-bold" to={'/register'} state={{from:location.state.from}} replace={true}>Register Now</Link>
                         </p>
                         <SocialAccess></SocialAccess>
                     </div>
