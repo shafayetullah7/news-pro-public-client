@@ -1,8 +1,37 @@
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxios";
 import useUsers from "../../../hooks/useUsers";
+import avatar from '../../../assets/user.jpg';
 
 const ManageUsers = () => {
-    const {data:users} = useUsers();
+    const {data:users,refetch} = useUsers();
     console.log(users);
+
+    const [axiosSecure] = useAxiosSecure();
+    const changeType = (email,type) =>{
+        Swal.fire(
+            'Processing request',
+          )
+        const data = {
+            type: type,
+            email: email,
+        };
+        axiosSecure.put('/type',data)
+        .then(res=>{
+            console.log(res);
+            Swal.fire(
+                'User updated',
+                '',
+                'success'
+              )
+            refetch();
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
+
+
     return (
         <div>
             <div className="overflow-x-auto">
@@ -30,7 +59,7 @@ const ManageUsers = () => {
                                     <div className="flex items-center space-x-3">
                                         <div className="avatar">
                                         <div className="rounded-full w-12 h-12">
-                                            <img className="w-full h-full object-cover object-center" src={user.photoUrl} alt="user-image" />
+                                            <img className="w-full h-full object-cover object-center" src={user.photoUrl || avatar} alt="user-image" />
                                         </div>
                                         </div>
                                         <div>
@@ -42,8 +71,8 @@ const ManageUsers = () => {
                                 <td>{user.email}</td>
                                 <td>
                                     <div className="flex items-center justify-start flex-wrap gap-2">
-                                        <button className="border border-admin bg-admin text-xs px-3 py-2 rounded-md font-bold text-white">Make Admin</button>
-                                        <button className="border border-instructor bg-instructor text-xs px-3 py-2 rounded-md font-bold ">Make Instructor</button>
+                                        <button className={`border border-admin bg-admin active:scale-95 duration-100 ${user?.type==='admin' && 'bg-opacity-70'} text-xs px-3 py-2 rounded-md font-bold text-white`} disabled={user?.type==='admin'} onClick={()=>changeType(user.email,'admin')}>Make Admin</button>
+                                        <button className={`border border-instructor bg-instructor active:scale-95 duration-100 ${user?.type==='instructor' && 'bg-opacity-70'} text-xs px-3 py-2 rounded-md font-bold `} disabled={user?.type==='instructor'} onClick={()=>changeType(user.email,'instructor')}>Make Instructor</button>
                                         <button className="border border-student bg-student text-xs px-3 py-2 rounded-md font-bold">View</button>
                                     </div>
                                 </td>
