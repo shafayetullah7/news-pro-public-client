@@ -2,10 +2,16 @@ import { Navigate } from 'react-router-dom';
 import useProfile from '../../hooks/useProfile';
 
 const AdminOnly = ({children}) => {
-    const {data:profile} = useProfile();
+    const {data:profile,isLoading} = useProfile();
+    // console.log(isLoading);
+
     return (
         <div>
-            {profile?.type==='admin'?children:<Navigate to={'/dashboard'}></Navigate>}
+            {isLoading && <div className='w-fit mx-auto'><span className="loading loading-spinner loading-md"></span></div>}
+            {!isLoading && <>
+                {profile?.type==='admin'?children:<Navigate to={'/dashboard'}></Navigate>}
+            </>}
+            
         </div>
     );
     

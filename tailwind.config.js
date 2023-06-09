@@ -12,7 +12,10 @@ export default {
       },
       colors:{
         primary:'#002147',
-        secondary:'#884A39'
+        secondary:'#884A39',
+        admin:'#884A39',
+        instructor:'#C38154',
+        student:'#FFC26F',
       }
     },
   },

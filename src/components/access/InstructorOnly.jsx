@@ -2,10 +2,14 @@ import useProfile from '../../hooks/useProfile';
 import { Navigate } from 'react-router-dom';
 
 const InstructorOnly = ({children}) => {
-    const {data:profile} = useProfile();
+    const {data:profile,isLoading} = useProfile();
     return (
         <div>
-            {profile?.type==='instructor'?children:<Navigate to={'/dashboard'}></Navigate>}
+            {isLoading && <div className='w-fit mx-auto'><span className="loading loading-spinner loading-md"></span></div>}
+            {!isLoading && <>
+                {profile?.type==='instructor'?children:<Navigate to={'/dashboard'}></Navigate>}
+            </>}
+            
         </div>
     );
 };
