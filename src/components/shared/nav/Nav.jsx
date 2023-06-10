@@ -34,7 +34,8 @@ const Nav = () => {
     const logout = ()=>{
         logoutUser()
         .then(()=>{
-            console.log('logged out')
+            console.log('logged out');
+            navigate('/');
             // setdrawerOpen(false);
         })
     }

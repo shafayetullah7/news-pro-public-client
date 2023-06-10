@@ -30,7 +30,7 @@ const Dashboard = () => {
     </>
 
     const adminMenu = <>
-        <Link to={'/dashboard'}>
+        <Link to={'/dashboard/manageClasses'}>
         <div className="flex gap-3 items-center border-b w-[150px]">
             <Class></Class>
             <p>Manage Classes</p>

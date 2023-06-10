@@ -10,7 +10,9 @@ import PrivateRoute from "../access/PrivateRoute";
 import InstructorOnly from "../access/InstructorOnly";
 import AdminOnly from "../access/AdminOnly";
 import ManageUsers from "../dashboard/admin/ManageUsers";
-
+import ManageClasses from "../dashboard/admin/ManageClasses";
+import DenyClass from "../dashboard/admin/DenyClass";
+// import axios from "axios";
 
 
 const routes = createBrowserRouter([
@@ -42,6 +44,14 @@ const routes = createBrowserRouter([
                     {
                         path:'manageUsers',
                         element:<PrivateRoute><AdminOnly><ManageUsers></ManageUsers></AdminOnly></PrivateRoute>
+                    },
+                    {
+                        path:'manageClasses',
+                        element:<PrivateRoute><AdminOnly><ManageClasses></ManageClasses></AdminOnly></PrivateRoute>
+                    },
+                    {
+                        path:'denyClass/:id',
+                        element:<DenyClass></DenyClass>,
                     }
                 ]
             }

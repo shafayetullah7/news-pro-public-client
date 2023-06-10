@@ -10,43 +10,50 @@ FormLabel,
 } from '@mui/material';
 import useAuth from '../../../hooks/useAuth';
 import axios from 'axios';
+import useAxiosSecure from '../../../hooks/useAxios';
+import Swal from 'sweetalert2';
+import { useState } from 'react';
 
 const AddClass = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors },reset } = useForm();
   const {user} = useAuth();
+  const [axiosSecure] = useAxiosSecure();
+  const [error,setError]=useState('')
   // console.log(user);
 
   const onSubmit = (data) => {
-    console.log(data);
-    const classdata = {...data,instructorName:user.displayName,instructorEmail:user.email};
-    console.log(classdata);
-    console.log(classdata.classImage[0])
+    setError('');
+    // console.log(data);
+    // console.log(errors);
+    let classdata = {...data,instructorName:user.displayName,instructorEmail:user.email,availableSeats:parseInt(data.availableSeats),price:parseFloat(data.price),status:'pending'};
+    // console.log(classdata);
+    // console.log(classdata.classImage[0])
 
     const body = new FormData()
-    // body.set('key', import.meta.env.IMGBB_KEY);
     body.append('image', classdata.classImage[0]);
 
-    console.log(import.meta.env.IMGBB_KEY);
-
-    const imgbburl = `https://api.imgbb.com/1/upload?key=${import.meta.env.IMGBB_KEY}`;
-    console.log(imgbburl);
-
+    const imgbburl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`;
 
     axios({
       method: 'post',
       url: imgbburl,
       data: body
     })
-    .then(imgbb=>{
-      console.log(imgbb)
+    .then(data=>{
+      // console.log(data.data.data.display_url);
+      classdata = {...classdata,classImage:data.data.data.display_url};
+      axiosSecure.post('http://localhost:5000/classes',classdata)
+      .then(res=>{
+        console.log(res);
+        Swal.fire(
+          'Class added',
+          '',
+          'success'
+        )
+        reset();
+      })
     })
 
-    // axios({
-    //   method: 'post',
-    //   url: 'https://api.imgbb.com/1/upload',
-    //   data: body
-    // })
-    // .then(data=>console.log(data));
   };
 
   return (
@@ -74,12 +81,19 @@ const AddClass = () => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
+              <div>
               <input
                 type="file"
                 accept="image/*"
                 multiple
-                {...register('classImage', { required: true })}
+                {...register('classImage', { required:{
+                  value:true,
+                  message:'image is required'
+                } })}
               />
+              
+              </div>
+              {/* {<p className='text-xs text-red-600'>{errors?.classImage}</p>} */}
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl>
@@ -87,7 +101,7 @@ const AddClass = () => {
                 <TextField
                   {...register('instructorName')}
                   variant="outlined"
-                  defaultValue={user?.displayName} // Replace with actual logged-in user's display name
+                  defaultValue={user?.displayName}
                   fullWidth
                   disabled
                 />
@@ -99,7 +113,7 @@ const AddClass = () => {
                 <TextField
                   {...register('instructorEmail')}
                   variant="outlined"
-                  defaultValue={user?.email} // Replace with actual logged-in user's email
+                  defaultValue={user?.email}
                   fullWidth
                   disabled
                 />
@@ -158,6 +172,7 @@ const AddClass = () => {
             </Grid>
           </Grid>
         </form>
+        <p className='text-xs text-red-600'>{error}</p>
       </Box>
     </Container>
   );

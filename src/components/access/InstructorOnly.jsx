@@ -7,7 +7,7 @@ const InstructorOnly = ({children}) => {
         <div>
             {isLoading && <div className='w-fit mx-auto'><span className="loading loading-spinner loading-md"></span></div>}
             {!isLoading && <>
-                {profile?.type==='instructor'?children:<Navigate to={'/dashboard'}></Navigate>}
+                {profile?.type==='instructor'?children:<Navigate to={'/'}></Navigate>}
             </>}
             
         </div>
