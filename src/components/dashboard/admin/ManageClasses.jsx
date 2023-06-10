@@ -4,12 +4,13 @@ import { Button, Modal } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxios";
+import Swal from "sweetalert2";
 // import axios from "axios";
 
 const ManageClasses = () => {
     const navigate = useNavigate();
-    const {data:classes} = useClasses();
-    console.log(classes);
+    const {data:classes,isLoading,refetch} = useClasses();
+    // console.log(classes);
 
     const [axiosSecure] = useAxiosSecure();
 
@@ -26,8 +27,23 @@ const ManageClasses = () => {
     };
 
     const handleApprove = (id) =>{
-        console.log(id);
-        axiosSecure.put('')
+        // console.log(id);
+        const update = {status:'approved'};
+        // console.log(update);
+
+        axiosSecure.put(`http://localhost:5000/classes/${id}/approve`,update)
+        .then(()=>{
+            // console.log(res);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Class Approved',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            refetch();
+        })
+        .catch(err=>console.log(err))
     }
     
     
@@ -37,6 +53,7 @@ const ManageClasses = () => {
                 <p className="text-3xl font-bold pb-2 text-admin">Manage Classes</p>
 
             </div>
+            {isLoading && <div className="w-fit mx-auto"><span className="loading loading-spinner loading-md"></span></div>}
             <div>
                 <Modal
                     open={openModal}
@@ -54,10 +71,12 @@ const ManageClasses = () => {
                                 <p className="text-xl font-bold"><span className="font-bold">Class: </span>{cardData?.className}</p>
                                 <p className="mt-4"><span className="font-bold">Instructor: </span>{cardData?.instructorName}</p>
                                 <p><span className="font-bold">Email: </span>{cardData?.instructorEmail}</p>
+                                <p><span className="font-bold">Status: </span>{cardData?.status}</p>
                                 <div className="flex justify-between mt-3">
                                     <p><span className="font-bold">Seats: </span>{cardData?.availableSeats}</p>
                                     <p><span className="font-bold">Price: </span>{cardData?.price}</p>
                                 </div>
+                                
                             </div>
                         </div>
                     <Button

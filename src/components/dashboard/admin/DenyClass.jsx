@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxios";
+import Swal from "sweetalert2";
 
 
 const DenyClass = () => {
@@ -8,6 +9,7 @@ const DenyClass = () => {
     const {id} = useParams();
     const [axiosSecure] = useAxiosSecure();
     // console.log(id);
+    const navigate = useNavigate();
 
     const {data,isLoading} = useQuery({
         queryKey:['class',id],
@@ -26,9 +28,18 @@ const DenyClass = () => {
         console.log(update);
 
         axiosSecure.put(`http://localhost:5000/classes/${id}/deny`,update)
-        .then(res=>{
-            console.log(res);
+        .then(()=>{
+            // console.log(res);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Class Denied!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+              navigate(-1);
         })
+        .catch(err=>console.log(err))
     }
     console.log(data);
     return (
