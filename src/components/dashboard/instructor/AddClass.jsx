@@ -20,17 +20,33 @@ const AddClass = () => {
     console.log(data);
     const classdata = {...data,instructorName:user.displayName,instructorEmail:user.email};
     console.log(classdata);
+    console.log(classdata.classImage[0])
 
     const body = new FormData()
-    body.set('key', import.meta.env.IMGBB_KEY);
-    body.append('image', classdata.classImage[0])
+    // body.set('key', import.meta.env.IMGBB_KEY);
+    body.append('image', classdata.classImage[0]);
+
+    console.log(import.meta.env.IMGBB_KEY);
+
+    const imgbburl = `https://api.imgbb.com/1/upload?key=${import.meta.env.IMGBB_KEY}`;
+    console.log(imgbburl);
+
 
     axios({
       method: 'post',
-      url: 'https://api.imgbb.com/1/upload',
+      url: imgbburl,
       data: body
     })
-    .then(data=>console.log(data));
+    .then(imgbb=>{
+      console.log(imgbb)
+    })
+
+    // axios({
+    //   method: 'post',
+    //   url: 'https://api.imgbb.com/1/upload',
+    //   data: body
+    // })
+    // .then(data=>console.log(data));
   };
 
   return (
@@ -61,6 +77,7 @@ const AddClass = () => {
               <input
                 type="file"
                 accept="image/*"
+                multiple
                 {...register('classImage', { required: true })}
               />
             </Grid>
