@@ -12,6 +12,7 @@ import AdminOnly from "../access/AdminOnly";
 import ManageUsers from "../dashboard/admin/ManageUsers";
 import ManageClasses from "../dashboard/admin/ManageClasses";
 import DenyClass from "../dashboard/admin/DenyClass";
+import Classes from "../classes/Classes";
 // import axios from "axios";
 
 
@@ -32,6 +33,10 @@ const routes = createBrowserRouter([
             {
                 path:'/register',
                 element:<Register></Register>
+            },
+            {
+                path:'/classes',
+                element:<Classes></Classes>
             },
             {
                 path:'dashboard',

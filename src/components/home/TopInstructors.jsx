@@ -14,13 +14,15 @@ import "swiper/css/pagination";
 
 import { FreeMode, Navigation, Pagination } from "swiper";
 import { Fade, Slide, Zoom } from 'react-awesome-reveal';
+import useAxiosSecure from '../../hooks/useAxios';
 
 
 const TopInstructors = () => {
     const [instructors,setInstructors] = useState();
+    const [axiosSecure] = useAxiosSecure();
 
     useEffect(()=>{
-        axios.get('https://newspro-server.vercel.app/top-instructors')
+        axiosSecure.get('/top-instructors')
         .then(res=>{
             setInstructors(res.data);
         })
@@ -122,7 +124,8 @@ const TopInstructors = () => {
                                         <div className='p-5 absolute bg-black bg-opacity-60 opacity-0 hover:opacity-100 duration-300 inset-0'>
                                             <p className='text-4xl text-gray-200'>{instructor.name}</p>
                                             <p className='text-xs text-gray-200'>{instructor.email}</p>
-                                            <button className='text-gray-200 border-2 rounded-full absolute bottom-0 z-20 left-1/2 -translate-x-1/2 px-5 py-2'>Details</button>
+                                            <p className='text-xs text-gray-200 mt-4'>Students: {instructor.totalStudents}</p>
+                                            <button className='text-gray-200 border-2 rounded-full absolute bottom-2 z-20 left-1/2 -translate-x-1/2 px-5 py-2'>Details</button>
                                             
                                         </div>
                                     </div>
