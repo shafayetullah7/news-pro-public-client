@@ -57,7 +57,7 @@ const Nav = () => {
                 {navItems}
             </ul>
             </div>
-            <a className="font-abril normal-case text-3xl md:text-4xl border-b-4 border-primary">News Pro</a>
+            <a className="font-abril normal-case text-3xl md:text-4xl border-b-4 border-primary text-primary">News Pro</a>
         </div>
         <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1 text-lg font-merri">
