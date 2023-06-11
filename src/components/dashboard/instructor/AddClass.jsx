@@ -42,7 +42,7 @@ const AddClass = () => {
     .then(data=>{
       // console.log(data.data.data.display_url);
       classdata = {...classdata,classImage:data.data.data.display_url};
-      axiosSecure.post('http://localhost:5000/classes',classdata)
+      axiosSecure.post('https://newspro-server.vercel.app/classes',classdata)
       .then(res=>{
         console.log(res);
         Swal.fire(

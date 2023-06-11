@@ -11,7 +11,7 @@ const useProfile = ()=>{
     const result = useQuery({
         queryKey:[user.email],
         queryFn:async()=>{
-            return axiosSecure.get(`http://localhost:5000/users/${user.email}`)
+            return axiosSecure.get(`https://newspro-server.vercel.app/users/${user.email}`)
             .then(data=>data.data);
         }
     })

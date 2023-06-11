@@ -6,7 +6,7 @@ const useClasses = () =>{
     const query = useQuery({
         queryKey:['classes'],
         queryFn:()=>{
-            return axiosSecure(`http://localhost:5000/classes`)
+            return axiosSecure(`https://newspro-server.vercel.app/classes`)
             .then(data=>{
                 return data.data;
             })

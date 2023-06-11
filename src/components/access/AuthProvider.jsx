@@ -48,7 +48,7 @@ const AuthProvider = ({children}) => {
             setUser(currentUser)
             if (currentUser) {
                 // console.log(currentUser);
-                axios.post('http://localhost:5000/jwt',{email:currentUser.email})
+                axios.post('https://newspro-server.vercel.app/jwt',{email:currentUser.email})
                 .then(data=>{
                     // console.log(data.data);
                     localStorage.setItem('news-pro-token',data.data.token)

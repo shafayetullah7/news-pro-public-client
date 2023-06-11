@@ -32,7 +32,7 @@ const Register = () => {
         console.log(result);
         updateUser(data.name,data.photoUrl)
         .then(()=>{
-            // axios.post('http://localhost:5000/users',userData)
+            // axios.post('https://newspro-server.vercel.app/users',userData)
             axiosSecure.post('/users',userData)
             .then(data=>{
                 console.log(data);

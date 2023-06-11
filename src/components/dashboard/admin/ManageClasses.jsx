@@ -31,7 +31,7 @@ const ManageClasses = () => {
         const update = {status:'approved'};
         // console.log(update);
 
-        axiosSecure.put(`http://localhost:5000/classes/${id}/approve`,update)
+        axiosSecure.put(`https://newspro-server.vercel.app/classes/${id}/approve`,update)
         .then(()=>{
             // console.log(res);
             Swal.fire({

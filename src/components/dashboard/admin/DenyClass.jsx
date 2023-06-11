@@ -14,7 +14,7 @@ const DenyClass = () => {
     const {data,isLoading} = useQuery({
         queryKey:['class',id],
         queryFn:async()=>{
-            return axiosSecure.get(`http://localhost:5000/classes/${id}`).then(res=>{
+            return axiosSecure.get(`https://newspro-server.vercel.app/classes/${id}`).then(res=>{
                 return res.data;
             })
         }
@@ -27,7 +27,7 @@ const DenyClass = () => {
         const update = {status:'denied',feedback};
         console.log(update);
 
-        axiosSecure.put(`http://localhost:5000/classes/${id}/deny`,update)
+        axiosSecure.put(`https://newspro-server.vercel.app/classes/${id}/deny`,update)
         .then(()=>{
             // console.log(res);
             Swal.fire({

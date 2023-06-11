@@ -11,7 +11,7 @@ const useUsers = ()=>{
     const result = useQuery({
         queryKey:['users'],
         queryFn:async()=>{
-            return axiosSecure.get(`http://localhost:5000/users`)
+            return axiosSecure.get(`https://newspro-server.vercel.app/users`)
             .then(data=>data.data);
         }
     })
