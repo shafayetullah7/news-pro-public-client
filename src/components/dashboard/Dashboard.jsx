@@ -3,6 +3,7 @@ import { SiGoogleclassroom } from "react-icons/si";
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import useProfile from "../../hooks/useProfile";
+import { MdList } from "react-icons/md";
 
 const Dashboard = () => {
     const {data:profile,isLoading} = useProfile();
@@ -32,17 +33,34 @@ const Dashboard = () => {
     const adminMenu = <>
         <Link to={'/dashboard/manageClasses'}>
         <div className="flex gap-3 items-center border-b w-[150px]">
-            <Class></Class>
+            <Class className="text-2xl"></Class>
             <p>Manage Classes</p>
         </div>
         </Link>
         <Link to={'/dashboard/manageUsers'}>
         <div className="flex gap-3 items-center border-b w-[150px]">
-            <SiGoogleclassroom className="text-xl"></SiGoogleclassroom>
+            <SiGoogleclassroom className="text-2xl"></SiGoogleclassroom>
             <p>Manage Users</p>
         </div>
         </Link>
     </>
+
+    const studentMenu = <>
+    <Link to={'/dashboard/wishlist'}>
+    <div className="flex gap-3 items-center border-b w-[150px]">
+        <MdList className="text-3xl"></MdList>
+        <p>My Wishlist</p>
+    </div>
+    </Link>
+    <Link to={'/dashboard/manageUsers'}>
+    <div className="flex gap-3 items-center border-b w-[150px]">
+        <SiGoogleclassroom className="text-2xl"></SiGoogleclassroom>
+        <p>Enrolled Classes</p>
+    </div>
+    </Link>
+    </>
+
+
     return (
         
         <div>
@@ -58,6 +76,7 @@ const Dashboard = () => {
                     <div className="collapse-content text-primary-content mt-5 flex justify-between"> 
                         {profile?.type==='instructor' && InstructorMenus}
                         {profile?.type==='admin' && adminMenu}
+                        {(profile?.type!=='instructor' || profile?.type!=='admin') && studentMenu}
                     </div>
                 </div>
             </div>
@@ -71,6 +90,7 @@ const Dashboard = () => {
                         <div className="px-5 mt-5 flex flex-col gap-5 ">
                             {profile?.type==='instructor' && InstructorMenus}
                             {profile?.type==='admin' && adminMenu}
+                            {(profile?.type!=='instructor' || profile?.type!=='admin') && studentMenu}
                         </div>
                     </div>
                 </div>

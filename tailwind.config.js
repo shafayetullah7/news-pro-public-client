@@ -15,7 +15,7 @@ export default {
         secondary:'#884A39',
         admin:'#884A39',
         instructor:'#C38154',
-        student:'#FFC26F',
+        student:'#402218',
       }
     },
   },

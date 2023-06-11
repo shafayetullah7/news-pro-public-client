@@ -13,6 +13,8 @@ import ManageUsers from "../dashboard/admin/ManageUsers";
 import ManageClasses from "../dashboard/admin/ManageClasses";
 import DenyClass from "../dashboard/admin/DenyClass";
 import Classes from "../classes/Classes";
+import Wishlist from "../dashboard/student/Wishlist";
+import StudentOnly from "../access/StudentOnly";
 // import axios from "axios";
 
 
@@ -57,6 +59,10 @@ const routes = createBrowserRouter([
                     {
                         path:'denyClass/:id',
                         element:<DenyClass></DenyClass>,
+                    },
+                    {
+                        path:'wishlist',
+                        element:<PrivateRoute><StudentOnly><Wishlist></Wishlist></StudentOnly></PrivateRoute>
                     }
                 ]
             }
