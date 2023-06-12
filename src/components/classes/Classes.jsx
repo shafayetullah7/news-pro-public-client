@@ -108,7 +108,7 @@ const Classes = () => {
             <div className="mt-44 lg:mx-24">
                 {classes && <div className="grid md:grid-cols-3 gap-y-20 grid-cols-1 justify-items-center">
                     {classes.map(cls=><Fade delay={200} duration={2000} key={cls._id}>
-                        <div className=" border h-[400px] p-3 shadow-xl rounded-xl relative w-[300px] dark:text-white">
+                        <div className={` border h-[400px] p-3 shadow-xl rounded-xl relative w-[300px] dark:text-white ${cls.availableSeats===0 && 'bg-red-400'}`}>
                             <img src={cls.classImage} className="h-[200px] object-cover object-top w-full rounded-lg" alt="" />
                             <div className="w-full relative">
                                 <h1 className="text-lg h-[70px] pt-3 font-bold">{cls.className}</h1>
@@ -117,7 +117,7 @@ const Classes = () => {
                                 <p><span className="font-bold">Price:</span>{cls.price}</p>
                             </div>
                             <div className="tooltip tooltip-bottom absolute bottom-3  right-3 w-fit" data-tip="Add to Wishlist">
-                            <button className={`text-primary dark:text-blue-400 text-7xl  block w-fit ${(profile?.type==='instructor' || profile?.type==='admin')?'opacity-50':'hover:scale-110 duration-200 active:scale-90'}`} disabled={profile?.type==='instructor' || profile?.type==='admin'} onClick={()=>handleWish(cls)}><AiFillPlusCircle></AiFillPlusCircle></button>
+                            <button className={`text-primary dark:text-blue-400 text-7xl  block w-fit ${(profile?.type==='instructor' || profile?.type==='admin' || cls.availableSeats===0)?'opacity-50':'hover:scale-110 duration-200 active:scale-90'}`} disabled={profile?.type==='instructor' || profile?.type==='admin' || cls.availableSeats===0} onClick={()=>handleWish(cls)}><AiFillPlusCircle></AiFillPlusCircle></button>
                             </div>
                             
                         </div>

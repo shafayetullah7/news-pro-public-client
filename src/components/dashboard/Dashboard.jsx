@@ -52,7 +52,7 @@ const Dashboard = () => {
         <p>My Wishlist</p>
     </div>
     </Link>
-    <Link to={'/dashboard/manageUsers'}>
+    <Link to={'/dashboard/enrolledClasses'}>
     <div className="flex gap-3 items-center border-b w-[150px]">
         <SiGoogleclassroom className="text-2xl"></SiGoogleclassroom>
         <p>Enrolled Classes</p>

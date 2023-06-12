@@ -8,6 +8,8 @@ import { useState } from "react";
 import { AiFillEye } from "react-icons/ai";
 import empty from '../../../assets/empty.jpg';
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Wishlist = () => {
     // const {user} = useAuth();
@@ -23,7 +25,7 @@ const Wishlist = () => {
     })
     console.log(wishlist)
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     // console.log(classes);
 
     const [openModal, setOpenModal] = useState(false);
@@ -40,6 +42,7 @@ const Wishlist = () => {
 
     const handleEnroll = (wish) =>{
         console.log(wish);
+        navigate(`/dashboard/payment/${wish._id}`);
     }
 
     const handleRemove = (wish) =>{
@@ -81,6 +84,9 @@ const Wishlist = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>NewsPro | Wishlist</title>
+            </Helmet>
             <div className="flex justify-between items-center border-b border-b-student px-5">
                 <p className="text-3xl font-bold pb-2 text-student">My Wishlist</p>
 

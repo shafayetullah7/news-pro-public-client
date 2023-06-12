@@ -15,6 +15,9 @@ import DenyClass from "../dashboard/admin/DenyClass";
 import Classes from "../classes/Classes";
 import Wishlist from "../dashboard/student/Wishlist";
 import StudentOnly from "../access/StudentOnly";
+import Payment from "../payment/Payment";
+import EnrolledClasses from "../dashboard/student/EnrolledClasses";
+// import useAxiosSecure from "../../hooks/useAxios";
 // import axios from "axios";
 
 
@@ -63,7 +66,16 @@ const routes = createBrowserRouter([
                     {
                         path:'wishlist',
                         element:<PrivateRoute><StudentOnly><Wishlist></Wishlist></StudentOnly></PrivateRoute>
+                    },
+                    {
+                        path:'payment/:id',
+                        element:<PrivateRoute><StudentOnly><Payment></Payment></StudentOnly></PrivateRoute>,
+                    },
+                    {
+                        path:'enrolledClasses',
+                        element:<PrivateRoute><StudentOnly><EnrolledClasses></EnrolledClasses></StudentOnly></PrivateRoute>
                     }
+                    
                 ]
             }
         ]
