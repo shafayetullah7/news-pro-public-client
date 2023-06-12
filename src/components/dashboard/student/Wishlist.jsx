@@ -7,14 +7,15 @@ import { Button, Modal } from "@mui/material";
 import { useState } from "react";
 import { AiFillEye } from "react-icons/ai";
 import empty from '../../../assets/empty.jpg';
+import Swal from "sweetalert2";
 
 const Wishlist = () => {
     // const {user} = useAuth();
     const [axiosSecure] = useAxiosSecure();
-    const {data:wishlist} = useQuery({
+    const {data:wishlist,refetch} = useQuery({
         queryKey:['wishlist'],
         queryFn:async()=>{
-            return axiosSecure.get(`http://localhost:5000/wishlist?classId=`)
+            return axiosSecure.get(`/wishlist`)
             .then(res=>{
                 return res.data;
             })
@@ -36,6 +37,46 @@ const Wishlist = () => {
     const handleCloseModal = () => {
         setOpenModal(false);
     };
+
+    const handleEnroll = (wish) =>{
+        console.log(wish);
+    }
+
+    const handleRemove = (wish) =>{
+        console.log(wish);
+        Swal.fire({
+            title: 'Are you sure?',
+            icon:'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes,remove',
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+            //   navigate('/login',{state:{from:location}});
+                axiosSecure.delete(`http://localhost:5000/enrollments/${wish._id}`)
+                .then(()=>{
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Class removed from wishlist',
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
+                    refetch();
+                })
+                .catch((err)=>{
+                    console.log(err);
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Failed to remove!',
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
+                })
+            } 
+          })
+    }
 
 
     return (
@@ -98,14 +139,14 @@ const Wishlist = () => {
                     {wishlist && wishlist.map((wish)=>{
                         return (
                             <tr key={wish._id}>
-                                <th><AiFillEye className="text-2xl cursor-pointer hover:scale-110 duration-150 active:scale-90" onClick={()=>handleOpenModal(wish)}></AiFillEye></th>
-                                <td>
+                                <th><AiFillEye className="text-2xl cursor-pointer hover:scale-110 duration-150 active:scale-90 dark:text-white" onClick={()=>handleOpenModal(wish)}></AiFillEye></th>
+                                <td className="dark:text-white">
                                     {wish.className}
                                 </td>
-                                <td className="dark:text-white">{wish.price}</td>
+                                <td className="dark:text-white">${wish.price}</td>
                                 <td>
                                     <div className="flex items-center justify-start flex-wrap gap-2">
-                                        <button className={`border border-green-600 bg-green-600 active:scale-95 duration-100 ${wish?.enrollStatus==='enrolled'?'bg-opacity-70':'active:scale-95 duration-100'} text-xs px-3 py-2 rounded-md font-bold text-white`} disabled={wish?.enrollStatus==='enrolled'} onClick={()=>handleEnroll(wish?._id)}>Enroll</button>
+                                        <button className={`border border-green-600 bg-green-600 active:scale-95 duration-100 ${wish?.enrollStatus==='enrolled'?'bg-opacity-70':'active:scale-95 duration-100'} text-xs px-3 py-2 rounded-md font-bold text-white`} disabled={wish?.enrollStatus==='enrolled'} onClick={()=>handleEnroll(wish)}>Enroll</button>
                                         <button className={`border border-red-600 text-white bg-red-600 ${wish?.enrollStatus==='enrolled'?'bg-opacity-70':'active:scale-95 duration-100'} text-xs px-3 py-2 rounded-md font-bold `} disabled={wish?.enrollStatus==='denied'} onClick={()=>handleRemove(wish)}>Remove</button>
                                     </div>
                                 </td>

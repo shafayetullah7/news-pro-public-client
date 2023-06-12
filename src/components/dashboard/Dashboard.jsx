@@ -76,7 +76,7 @@ const Dashboard = () => {
                     <div className="collapse-content text-primary-content mt-5 flex justify-between"> 
                         {profile?.type==='instructor' && InstructorMenus}
                         {profile?.type==='admin' && adminMenu}
-                        {(profile?.type!=='instructor' || profile?.type!=='admin') && studentMenu}
+                        {(profile?.type==='student') && studentMenu}
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@ const Dashboard = () => {
                         <div className="px-5 mt-5 flex flex-col gap-5 ">
                             {profile?.type==='instructor' && InstructorMenus}
                             {profile?.type==='admin' && adminMenu}
-                            {(profile?.type!=='instructor' || profile?.type!=='admin') && studentMenu}
+                            {(profile?.type==='student') && studentMenu}
                         </div>
                     </div>
                 </div>

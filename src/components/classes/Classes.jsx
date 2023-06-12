@@ -64,7 +64,7 @@ const Classes = () => {
             date:new Date().toISOString()
         }
         console.log(enrollment);
-        axiosSecure.post('http://localhost:5000/enrollments',enrollment)
+        axiosSecure.post('/enrollments',enrollment)
         .then(res=>{
             console.log(res);
             if(res.data.exist){
