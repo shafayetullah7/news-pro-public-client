@@ -6,7 +6,7 @@ import { Button, Modal } from "@mui/material";
 import { useState } from "react";
 import empty from '../../../assets/empty.jpg';
 
-const EnrolledClasses = () => {
+const PaymentHistory = () => {
     const [axiosSecure] = useAxiosSecure();
     // console.log(classes);
 
@@ -22,10 +22,10 @@ const EnrolledClasses = () => {
         setOpenModal(false);
     };
 
-    const {data:enrolledClasses} = useQuery({
-        queryKey:['enrolledClasses'],
-        queryFn:()=>{
-            return axiosSecure('http://localhost:5000/enrolled-classes')
+    const {data:payments} = useQuery({
+        queryKey:['payments'],
+        queryFn:async()=>{
+            return axiosSecure('http://localhost:5000/payment-history')
             .then(result=>{
                 console.log(result.data);
                 return result.data;
@@ -38,7 +38,7 @@ const EnrolledClasses = () => {
                 <title>NewsPro | Enrolled Classes</title>
             </Helmet>
             <div className="flex justify-between items-center border-b border-b-student px-5">
-                <p className="text-3xl font-bold pb-2 text-student">My enrolledClasses</p>
+                <p className="text-3xl font-bold pb-2 text-student">My payments</p>
             </div>
             <div>
                 <Modal
@@ -87,12 +87,13 @@ const EnrolledClasses = () => {
                         </th>
                         <th>Class Name</th>
                         <th>Transaction Date</th>
-                        <th>Status</th>
+                        <th>Transaction Time</th>
+                        <th>Price</th>
                     </tr>
                     </thead>
                     <tbody>
                     {/* row 2 */}
-                    {enrolledClasses && enrolledClasses.map((enroll)=>{
+                    {payments && payments.map((enroll)=>{
                         return (
                             <tr key={enroll._id}>
                                 <th><AiFillEye className="text-2xl cursor-pointer hover:scale-110 duration-150 active:scale-90 dark:text-white" onClick={()=>handleOpenModal(enroll)}></AiFillEye></th>
@@ -100,7 +101,8 @@ const EnrolledClasses = () => {
                                     {enroll.className}
                                 </td>
                                 <td className="dark:text-white">{new Date(enroll.paymentDate).toISOString().substring(0, 10)}</td>
-                                <td className="dark:text-white">{enroll.enrollStatus}</td>
+                                <td className="dark:text-white">{new Date(enroll.paymentDate).toISOString().substring(11, 19)}</td>
+                                <td className="dark:text-white font-bold">${enroll.price}</td>
                             </tr>
                         )
                     })}
@@ -112,4 +114,4 @@ const EnrolledClasses = () => {
     );
 };
 
-export default EnrolledClasses;
+export default PaymentHistory;
