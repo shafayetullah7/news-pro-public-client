@@ -36,7 +36,7 @@ const Register = () => {
             axiosSecure.post('/users',userData)
             .then(data=>{
                 console.log(data);
-                Swal.fire('','Logged In','success')
+                Swal.fire('Logged In','','success')
                 navigate(from || '/',{replace:true});
             })
             .catch(err=>{

@@ -25,7 +25,7 @@ const TopClasses = () => {
       
 
 
-    console.log('top classes:',topClasses)
+    // console.log('top clas/ses:',topClasses)
     return (
         <div>
             <h1 className="text-center text-5xl md:text-7xl md:tracking-wider text-primary font-bold md:w-2/3 mx-auto">Most Popular Courses</h1>

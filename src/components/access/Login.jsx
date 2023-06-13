@@ -35,7 +35,7 @@ const Login = () => {
         loginUser(data.email,data.password)
         .then(result=>{
             console.log(result);
-            Swal.fire('','Logged In','success')
+            Swal.fire('Logged In','','success')
 
             navigate(from || '/',{replace:true});
             

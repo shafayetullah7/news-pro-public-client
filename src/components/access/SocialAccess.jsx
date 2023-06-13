@@ -2,6 +2,7 @@ import { FaGoogle } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 const SocialAccess = () => {
     const {googleLogin} = useAuth();
     const navigate = useNavigate();
@@ -10,9 +11,26 @@ const SocialAccess = () => {
         googleLogin()
         .then(result=>{
             console.log(result)
-            Swal.fire('','Logged In','success')
-            navigate('/',{replace:true});
+            const {user} = result;
+            const userData = {
+                name:user.displayName,
+                email:user.email,
+                phoneNumber:user.phoneNumber || '',
+                photoUrl:user.photoURL,
+                gender:'',
+                address:'',
+                type:'student'
+            }
+            console.log('userData:',userData);
+            axios.post('http://localhost:5000/social-user',userData)
+            .then(res=>{
+                console.log(res);
+                Swal.fire('Logged In','','success')
+                navigate('/',{replace:true});
+            })
+            .catch(err=>console.log(err));
         })
+        .catch(err=>console.log(err));
     }
     return (
         <div className="w-full mt-10">
