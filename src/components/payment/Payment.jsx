@@ -27,6 +27,7 @@ const Payment = () => {
         })
         .catch(err=>{
             console.log(err);
+            console.log('inside error');
         })
     },[id,axiosSecure])
 

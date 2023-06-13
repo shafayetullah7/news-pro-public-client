@@ -27,7 +27,7 @@ const PaymentHistory = () => {
         queryFn:async()=>{
             return axiosSecure('http://localhost:5000/payment-history')
             .then(result=>{
-                console.log(result.data);
+                // console.log(result.data);
                 return result.data;
             })
         }

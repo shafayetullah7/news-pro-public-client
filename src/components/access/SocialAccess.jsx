@@ -7,7 +7,7 @@ const SocialAccess = () => {
     const {googleLogin} = useAuth();
     const navigate = useNavigate();
 
-    const handleGoogleLogin = () =>{
+    const handleGoogleLogin = ({location}) =>{
         googleLogin()
         .then(result=>{
             console.log(result)
@@ -26,7 +26,7 @@ const SocialAccess = () => {
             .then(res=>{
                 console.log(res);
                 Swal.fire('Logged In','','success')
-                navigate('/',{replace:true});
+                navigate(location || '/',{replace:true});
             })
             .catch(err=>console.log(err));
         })

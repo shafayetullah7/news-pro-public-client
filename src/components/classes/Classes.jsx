@@ -33,6 +33,16 @@ const Classes = () => {
         console.log(cls);
         console.log(user || 'no user');
         console.log(profile || 'no profile');
+        if(cls.availableSeats===0){
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'No seat available!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            return;
+        }
 
         if(!user){
             Swal.fire({
@@ -112,7 +122,7 @@ const Classes = () => {
             <div className="mt-44 lg:mx-24">
                 {classes && <div className="grid md:grid-cols-3 gap-y-20 grid-cols-1 justify-items-center">
                     {classes.map(cls=><Fade delay={200} duration={2000} key={cls._id}>
-                        <div className={` border h-[400px] p-3 shadow-xl rounded-xl relative w-[300px] dark:text-white ${cls.availableSeats===0 && 'bg-red-400'}`}>
+                        <div className={` border h-[400px] p-3 shadow-xl rounded-xl relative w-[300px] dark:text-white ${cls.availableSeats===0 && 'bg-red-200'}`}>
                             <img src={cls.classImage} className="h-[200px] object-cover object-top w-full rounded-lg" alt="" />
                             <div className="w-full relative">
                                 <h1 className="text-lg h-[70px] pt-3 font-bold">{cls.className}</h1>

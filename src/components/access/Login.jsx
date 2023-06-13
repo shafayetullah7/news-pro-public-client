@@ -94,7 +94,7 @@ const Login = () => {
                         <p className="mt-4 text-sm">
                             Don't have an account? <Link className="text-[#002147] underline hover:font-bold" to={'/register'} state={{from:location.state?.from}} replace={true}>Register Now</Link>
                         </p>
-                        <SocialAccess></SocialAccess>
+                        <SocialAccess location={from}></SocialAccess>
                     </div>
                 </div>
             </div>

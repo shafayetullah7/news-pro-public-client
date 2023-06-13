@@ -23,7 +23,7 @@ const Wishlist = () => {
             })
         }
     })
-    console.log(wishlist)
+    // console.log(wishlist)
 
     const navigate = useNavigate();
     // console.log(classes);
