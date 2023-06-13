@@ -38,7 +38,7 @@ const TopInstructors = () => {
                             <h1 className='text-6xl font-bold text-left md:tracking-wider'>Meet Our Exceptional Instructors</h1>
                         </Fade> */}
                         <Slide duration={1000}>
-                            <h1 className='text-6xl font-bold text-left md:tracking-wider text-primary'>Meet Our Exceptional Instructors</h1>
+                            <h1 className='text-5xl md:text-7xl font-bold text-left md:tracking-wider text-primary'>Meet Our Exceptional Instructors</h1>
                         </Slide>
                         <p className='md:w-[90%] text-sm text-gray-500 text-justify mt-8 tracking-widest'>
                             Our top-notch instructors bring a wealth of knowledge and expertise to the table. With years of experience in their respective fields, they are passionate about guiding and inspiring students on their learning journey. From industry veterans to accomplished scholars, our instructors are dedicated to creating an engaging and supportive environment that fosters growth and success. Join our classes and learn from the very best!
@@ -62,7 +62,7 @@ const TopInstructors = () => {
                                 }}
                                 
                                 // spaceBetween={40}
-                                slidesPerView={2}
+                                
                                 centeredSlides={true}
                                 navigation={true}
                                 mousewheel={true}

@@ -20,7 +20,7 @@ import EnrolledClasses from "../dashboard/student/EnrolledClasses";
 import Profile from "../dashboard/Profile";
 import PaymentHistory from "../dashboard/student/PaymentHistory";
 import Instructors from "../instructors/Instructors";
-import InstructorClasses from "../instructors/InstructorClasses";
+// import InstructorClasses from "../instructors/InstructorClasses";
 // import useAxiosSecure from "../../hooks/useAxios";
 // import axios from "axios";
 
@@ -50,10 +50,6 @@ const routes = createBrowserRouter([
             {
                 path:'/instructors',
                 element:<Instructors></Instructors>
-            },
-            {
-                path:'/instructors-classes',
-                element:<InstructorClasses></InstructorClasses>
             },
             {
                 path:'dashboard',

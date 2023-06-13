@@ -26,10 +26,14 @@ const Classes = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+
     // console.log(classes);
 
     const handleWish = (cls) =>{
-        // console.log(cls)
+        console.log(cls);
+        console.log(user || 'no user');
+        console.log(profile || 'no profile');
+
         if(!user){
             Swal.fire({
                 title: 'Login First',
