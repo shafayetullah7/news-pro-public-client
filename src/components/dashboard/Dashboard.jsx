@@ -31,7 +31,7 @@ const Dashboard = () => {
             <p>Add a class</p>
         </div>
         </Link>
-        <Link>
+        <Link to={'/dashboard/MyClasses'}>
         <div className="flex gap-3 items-center border-b w-[150px]">
             <SiGoogleclassroom className="text-xl"></SiGoogleclassroom>
             <p>My Classes</p>

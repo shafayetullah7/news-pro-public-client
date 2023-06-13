@@ -4,7 +4,7 @@ import useUsers from "../../../hooks/useUsers";
 import avatar from '../../../assets/user.jpg';
 
 const ManageUsers = () => {
-    const {data:users,refetch} = useUsers();
+    const {data:users,refetch,isLoading} = useUsers();
     console.log(users);
 
     const [axiosSecure] = useAxiosSecure();
@@ -45,6 +45,7 @@ const ManageUsers = () => {
                 <p className="text-3xl font-bold pb-2 text-admin">Manage Users</p>
 
             </div>
+            {isLoading && <div className="w-fit mx-auto"><span className="loading loading-spinner loading-md"></span></div>}
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

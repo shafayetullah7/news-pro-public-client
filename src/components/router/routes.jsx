@@ -20,6 +20,7 @@ import EnrolledClasses from "../dashboard/student/EnrolledClasses";
 import Profile from "../dashboard/Profile";
 import PaymentHistory from "../dashboard/student/PaymentHistory";
 import Instructors from "../instructors/Instructors";
+import MyClasses from "../dashboard/instructor/MyClasses";
 // import InstructorClasses from "../instructors/InstructorClasses";
 // import useAxiosSecure from "../../hooks/useAxios";
 // import axios from "axios";
@@ -62,6 +63,10 @@ const routes = createBrowserRouter([
                     {
                         path:'addClass',
                         element:<PrivateRoute><InstructorOnly><AddClass></AddClass></InstructorOnly></PrivateRoute>
+                    },
+                    {
+                        path:'myClasses',
+                        element:<PrivateRoute><InstructorOnly><MyClasses></MyClasses></InstructorOnly></PrivateRoute>
                     },
                     {
                         path:'manageUsers',

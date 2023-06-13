@@ -22,7 +22,7 @@ const EnrolledClasses = () => {
         setOpenModal(false);
     };
 
-    const {data:enrolledClasses} = useQuery({
+    const {data:enrolledClasses,isLoading} = useQuery({
         queryKey:['enrolledClasses'],
         queryFn:async()=>{
             return axiosSecure('http://localhost:5000/enrolled-classes')
@@ -40,6 +40,7 @@ const EnrolledClasses = () => {
             <div className="flex justify-between items-center border-b border-b-student px-5">
                 <p className="text-3xl font-bold pb-2 text-student">My enrolled Classes</p>
             </div>
+            {isLoading && <div className="w-fit mx-auto"><span className="loading loading-spinner loading-md"></span></div>}
             <div>
                 <Modal
                     open={openModal}

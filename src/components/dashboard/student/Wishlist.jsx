@@ -14,7 +14,7 @@ import { Helmet } from "react-helmet-async";
 const Wishlist = () => {
     // const {user} = useAuth();
     const [axiosSecure] = useAxiosSecure();
-    const {data:wishlist,refetch} = useQuery({
+    const {data:wishlist,refetch,isLoading} = useQuery({
         queryKey:['wishlist'],
         queryFn:async()=>{
             return axiosSecure.get(`/wishlist`)
@@ -91,6 +91,7 @@ const Wishlist = () => {
                 <p className="text-3xl font-bold pb-2 text-student">My Wishlist</p>
 
             </div>
+            {isLoading && <div className="w-fit mx-auto"><span className="loading loading-spinner loading-md"></span></div>}
             <div>
                 <Modal
                     open={openModal}
