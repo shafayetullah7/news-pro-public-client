@@ -4,7 +4,7 @@ import useAuth from "../../../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import { Button, Modal } from "@mui/material";
 import { AiFillEye } from "react-icons/ai";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import { useState } from "react";
 import empty from '../../../assets/empty.jpg';
 
@@ -12,7 +12,7 @@ import empty from '../../../assets/empty.jpg';
 const MyClasses = () => {
     const [axiosSecure] = useAxiosSecure();
     const {user} = useAuth();
-    const {data:myClasses,refetch,isLoading} = useQuery({
+    const {data:myClasses,isLoading} = useQuery({
         queryKey:['instructor-all-classes',user.email],
         queryFn:async()=>{
             return axiosSecure(`https://newspro-server.vercel.app/instructor-all-classes-enroll`)
