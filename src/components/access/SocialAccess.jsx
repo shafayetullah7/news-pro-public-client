@@ -22,7 +22,7 @@ const SocialAccess = () => {
                 type:'student'
             }
             console.log('userData:',userData);
-            axios.post('http://localhost:5000/social-user',userData)
+            axios.post('https://newspro-server.vercel.app/social-user',userData)
             .then(res=>{
                 console.log(res);
                 Swal.fire('Logged In','','success')

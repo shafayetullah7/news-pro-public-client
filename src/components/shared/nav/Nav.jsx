@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import avatar from '../../../assets/user.jpg';
 import { Tooltip } from "@mui/material";
@@ -22,9 +22,7 @@ const Nav = () => {
         else{
             document.documentElement.classList.remove('dark');
         }
-        // console.log(theme);
-        // console.log(localTheme);
-        // console.log(document.documentElement.classList);
+
     },[theme])
 
     const handleToggle = (e) =>{
@@ -41,10 +39,10 @@ const Nav = () => {
     }
 
     const navItems = <>
-        <li><Link to={'/'}>Home</Link></li>
-        <li><Link to={'/instructors'}>Instructors</Link></li>
-        <li><Link to={'/classes'}>Classes</Link></li>
-        {user && <li><Link to={'/dashboard'}>Dashboard</Link></li>}
+        <li><NavLink to={`/`}className={({ isActive }) =>isActive? "font-bold": ""}>Home</NavLink></li>
+        <li><NavLink to={`/instructors`}className={({ isActive }) =>isActive? "font-bold": ""}>Instructors</NavLink></li>
+        <li><NavLink to={`/classes`}className={({ isActive }) =>isActive? "font-bold": ""}>Classes</NavLink></li>
+        {user && <li><NavLink to={`/dashboard`}className={({ isActive }) =>isActive? "font-bold": ""}>Dashboard</NavLink></li>}
         
     </>
     return (

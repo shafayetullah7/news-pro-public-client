@@ -33,7 +33,7 @@ const FeedbackButtonContainer = styled('div')`display: flex; justify-content: ce
 
 const ManageClasses = () => {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const {data:classes,isLoading,refetch} = useClasses();
     // console.log(classes);
 
@@ -44,6 +44,7 @@ const ManageClasses = () => {
     const [feedbackOpen, setFeedbackOpen] = useState(false);
     const [feedbackText, setFeedbackText] = useState('');
     const [feedbackClass,setFeedbackClass] = useState();
+    const [processing,setProcessing] = useState(false);
 
     const handleFeedbackOpen = (cls) => {
         setFeedbackOpen(true);
@@ -55,11 +56,12 @@ const ManageClasses = () => {
     };
       
     const handleFeedbackSend = () => {
+        setProcessing(true);
         console.log('Sending feedback:', feedbackText);
         const update = {feedback:feedbackText};
         // console.log(update);
 
-        axiosSecure.put(`http://localhost:5000/classes/${feedbackClass._id}/feedback`,update)
+        axiosSecure.put(`https://newspro-server.vercel.app/classes/${feedbackClass._id}/feedback`,update)
         .then(()=>{
             // console.log(res);
             Swal.fire({
@@ -69,9 +71,13 @@ const ManageClasses = () => {
                 showConfirmButton: false,
                 timer: 1500
               })
+            setProcessing(false);
             refetch();
         })
-        .catch(err=>console.log(err))
+        .catch(err=>{
+            console.log(err);
+            setProcessing(false);
+        })
         setFeedbackText('');
         handleFeedbackClose();
     };
@@ -87,6 +93,7 @@ const ManageClasses = () => {
 
     const handleUpdate = (id,status) =>{
         // console.log(id);
+        setProcessing(true);
         const update = {status};
         // console.log(update);
 
@@ -100,6 +107,7 @@ const ManageClasses = () => {
                 showConfirmButton: false,
                 timer: 1500
               })
+            setProcessing(false);
             refetch();
         })
         .catch(err=>console.log(err))
@@ -115,9 +123,6 @@ const ManageClasses = () => {
             {isLoading && <div className="w-fit mx-auto"><span className="loading loading-spinner loading-md"></span></div>}
 
             <div>
-                <Button variant="contained" onClick={handleFeedbackOpen}>
-                    Open Modal
-                </Button>
                 <StyledModal open={feedbackOpen} onClose={handleFeedbackClose}>
                     <ModalContainer>
                     <Title>Write Feedback</Title>
@@ -190,7 +195,7 @@ const ManageClasses = () => {
                     </thead>
                     <tbody>
                     {/* row 2 */}
-                    {classes && classes.map((cls,index)=>{
+                    {classes && classes.map((cls)=>{
                         return (
                             <tr key={cls._id}>
                                 <th><AiFillEye className="text-2xl cursor-pointer hover:scale-110 duration-150 active:scale-90 dark:text-white" onClick={()=>handleOpenModal(cls)}></AiFillEye></th>
@@ -212,8 +217,8 @@ const ManageClasses = () => {
                                 <td className="dark:text-white">{cls.availableSeats}</td>
                                 <td>
                                     <div className="flex items-center justify-start flex-wrap gap-2">
-                                        <button className={`border border-green-600 bg-green-600 active:scale-95 duration-100 ${(cls?.status==='approved' || cls?.status==='denied')?'bg-opacity-70':'active:scale-95 duration-100'} text-xs px-3 py-2 rounded-md font-bold text-white`} disabled={(cls?.status==='approved' || cls?.status==='denied')} onClick={()=>handleUpdate(cls?._id,'approved')}>Approve</button>
-                                        <button className={`border border-red-600 text-white bg-red-600 ${(cls?.status==='approved' || cls?.status==='denied')?'bg-opacity-70':'active:scale-95 duration-100'} text-xs px-3 py-2 rounded-md font-bold `} disabled={(cls?.status==='approved' || cls?.status==='denied')} onClick={()=>handleUpdate(cls?._id,'denied')}>Deny</button>
+                                        <button className={`border border-green-600 bg-green-600 active:scale-95 duration-100 ${(cls?.status==='approved' || cls?.status==='denied' || processing)?'bg-opacity-70':'active:scale-95 duration-100'} text-xs px-3 py-2 rounded-md font-bold text-white ${processing && 'cursor-wait'}`} disabled={(cls?.status==='approved' || cls?.status==='denied' || processing)} onClick={()=>handleUpdate(cls?._id,'approved')}>Approve</button>
+                                        <button className={`border border-red-600 text-white bg-red-600 active:scale-95 duration-100 ${(cls?.status==='approved' || cls?.status==='denied' || processing)?'bg-opacity-70':'active:scale-95 duration-100'} text-xs px-3 py-2 rounded-md font-bold ${processing && 'cursor-wait'}`} disabled={(cls?.status==='approved' || cls?.status==='denied' || processing)} onClick={()=>handleUpdate(cls?._id,'denied')}>Deny</button>
                                         <button className={`border gray-red-600 text-white bg-gray-800 text-xs px-3 py-2 rounded-md font-bold `} onClick={()=>handleFeedbackOpen(cls)}>Feedback</button>
                                     </div>
                                 </td>

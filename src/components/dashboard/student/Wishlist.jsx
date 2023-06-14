@@ -56,7 +56,7 @@ const Wishlist = () => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
             //   navigate('/login',{state:{from:location}});
-                axiosSecure.delete(`http://localhost:5000/enrollments/${wish._id}`)
+                axiosSecure.delete(`https://newspro-server.vercel.app/enrollments/${wish._id}`)
                 .then(()=>{
                     Swal.fire({
                         position: 'top-end',

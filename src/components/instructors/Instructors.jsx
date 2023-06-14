@@ -22,7 +22,7 @@ const Instructors = () => {
     const {data:instructors} = useQuery({
         queryKey:['instructors'],
         queryFn:async()=>{
-            return axiosSecure('http://localhost:5000/instructors')
+            return axiosSecure('https://newspro-server.vercel.app/instructors')
             .then(res=>res.data);
         }
     })
@@ -33,7 +33,7 @@ const Instructors = () => {
             console.log('here');
             if(currnet){
                 console.log('here2');
-                return axiosSecure(`http://localhost:5000/instructor-classes/${currnet}`)
+                return axiosSecure(`https://newspro-server.vercel.app/instructor-classes/${currnet}`)
                 .then(res=>{
                     return res.data[0];
                 })

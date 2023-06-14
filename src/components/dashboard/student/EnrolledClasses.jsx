@@ -25,7 +25,7 @@ const EnrolledClasses = () => {
     const {data:enrolledClasses,isLoading} = useQuery({
         queryKey:['enrolledClasses'],
         queryFn:async()=>{
-            return axiosSecure('http://localhost:5000/enrolled-classes')
+            return axiosSecure('https://newspro-server.vercel.app/enrolled-classes')
             .then(result=>{
                 // console.log(result.data);
                 return result.data;

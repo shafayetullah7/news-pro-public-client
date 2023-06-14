@@ -25,7 +25,7 @@ const PaymentHistory = () => {
     const {data:payments,isLoading} = useQuery({
         queryKey:['payments'],
         queryFn:async()=>{
-            return axiosSecure('http://localhost:5000/payment-history')
+            return axiosSecure('https://newspro-server.vercel.app/payment-history')
             .then(result=>{
                 // console.log(result.data);
                 return result.data;

@@ -20,7 +20,7 @@ const CheckoutForm = ({price,enrollmentId}) => {
   console.log('checkout:',price);
 
   useEffect(()=>{
-    axiosSecure.post('http://localhost:5000/create-payment-intent',{price})
+    axiosSecure.post('https://newspro-server.vercel.app/create-payment-intent',{price})
     .then(res=>{
       console.log(res.data);
       setClientSecret(res.data.clientSecret);
@@ -85,7 +85,7 @@ const CheckoutForm = ({price,enrollmentId}) => {
         transactionId:paymentIntent.id,
         paymentDate:new Date().toISOString()
       }
-      axiosSecure.put(`http://localhost:5000/enrollments/${enrollmentId}`, updatedData)
+      axiosSecure.put(`https://newspro-server.vercel.app/enrollments/${enrollmentId}`, updatedData)
       .then(response => {
         console.log(response.data.message); // Enrollment updated successfully
         // Handle any further actions or UI updates

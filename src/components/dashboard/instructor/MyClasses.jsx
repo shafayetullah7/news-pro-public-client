@@ -15,7 +15,7 @@ const MyClasses = () => {
     const {data:myClasses,refetch,isLoading} = useQuery({
         queryKey:['instructor-all-classes',user.email],
         queryFn:async()=>{
-            return axiosSecure(`http://localhost:5000/instructor-all-classes-enroll`)
+            return axiosSecure(`https://newspro-server.vercel.app/instructor-all-classes-enroll`)
             .then(res=>{
                 console.log(res.data);
                 return res.data;

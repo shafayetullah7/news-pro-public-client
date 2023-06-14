@@ -10,7 +10,7 @@ const TopClasses = () => {
     const {data:topClasses} = useQuery({
         queryKey:['instructors'],
         queryFn:async()=>{
-            return axiosSecure('http://localhost:5000/top-classes')
+            return axiosSecure('https://newspro-server.vercel.app/top-classes')
             .then(res=>res.data);
         }
     })

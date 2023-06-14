@@ -17,7 +17,7 @@ const Payment = () => {
     // console.log(import.meta.env.VITE_STRIPE_KEY)
     useEffect(()=>{
         console.log('inside useeffect');
-        axiosSecure.get(`http://localhost:5000/enrollments/${id}`)
+        axiosSecure.get(`https://newspro-server.vercel.app/enrollments/${id}`)
         .then(result=>{
             console.log(result.data);
             console.log('result price',result.data.price);
