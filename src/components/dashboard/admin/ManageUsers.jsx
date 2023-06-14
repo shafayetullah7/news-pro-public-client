@@ -3,7 +3,7 @@ import useAxiosSecure from "../../../hooks/useAxios";
 import useUsers from "../../../hooks/useUsers";
 import avatar from '../../../assets/user.jpg';
 import { Button, Modal } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiFillEye } from "react-icons/ai";
 import empty from '../../../assets/empty.jpg';
 
@@ -45,14 +45,19 @@ const ManageUsers = () => {
         
     }
 
-    const handleOpenModal = (cls) => {
-        setCardData(cls);
+    const handleOpenModal = (user) => {
+        setCardData(user);
         setOpenModal(true);
     };
 
     const handleCloseModal = () => {
         setOpenModal(false);
+        setCardData(null);
     };
+
+    useEffect(()=>{
+        console.log(cardData);
+    },[cardData])
 
     return (
         <div >
@@ -72,17 +77,16 @@ const ManageUsers = () => {
                     >
                         <div className="flex flex-col sm:flex-row items-center gap-5 mb-5">
                             <div className="w-full">
-                                <img className="w-full h-full object-cover object-center" src={cardData?.classImage || empty} alt="" />
+                                <img className="w-full h-full object-cover object-center" src={cardData?.photoUrl || empty} alt="" />
                             </div>
                             <div className="w-full">
-                                <p className="text-xl font-bold"><span className="font-bold">Class: </span>{cardData?.className}</p>
-                                <p className="mt-4"><span className="font-bold">Instructor: </span>{cardData?.instructorName}</p>
-                                <p><span className="font-bold">Email: </span>{cardData?.instructorEmail}</p>
-                                <p><span className="font-bold">Status: </span>{cardData?.status}</p>
-                                <div className="flex justify-between mt-3">
-                                    <p><span className="font-bold">Seats: </span>{cardData?.availableSeats}</p>
-                                    <p><span className="font-bold">Price: </span>{cardData?.price}</p>
-                                </div>
+                                <p className="text-xl font-bold"><span className="font-bold"></span>{cardData?.name}</p>
+                                <p className="text-xs text-gray-600 mb-4"><span className="font-bold"></span>{cardData?.email}</p>
+                                <p><span className="font-bold">Phone: </span>{cardData?.phoneNumber}</p>
+                                <p><span className="font-bold">Gender: </span>{cardData?.gender}</p>
+                                <p><span className="font-bold">Status: </span>{cardData?.type}</p>
+                                <p><span className="font-bold">Address: </span>{cardData?.address}</p>
+                                
                                 
                             </div>
                         </div>
