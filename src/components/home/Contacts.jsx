@@ -5,7 +5,7 @@ import { FaFax } from "react-icons/fa";
 
 const Contacts = () => {
     return (
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:w-[800px] mx-auto justify-items-center">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:w-2/3 mx-auto justify-items-center">
             <div className="w-[140px] h-[140px] border-2 text-gray-700 dark:text-gray-300 border-gray-700 dark:border-gray-300 flex items-center justify-center flex-col gap-5 rounded-lg">
                 <MdLocationOn className="text-7xl"></MdLocationOn>
                 <div className="">
