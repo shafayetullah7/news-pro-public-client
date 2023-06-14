@@ -52,7 +52,7 @@ const Nav = () => {
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
             </label>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-lg text-primary dark:text-white font-merri">
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 z-20 shadow bg-base-100 rounded-box w-52 text-lg text-primary dark:text-white font-merri">
                 {navItems}
             </ul>
             </div>
@@ -75,31 +75,30 @@ const Nav = () => {
                 {!user && <Link to='/login' className="bg-primary text-white px-5 py-3 rounded-md font-bold text-sm hover:bg-white border-2 border-primary hover:text-primary duration-100 cursor-pointer font-merri normal-case tracking-widest">Login</Link>}
                 
                 {user && <div className="dropdown dropdown-end">
-                {/* <label tabIndex={0} className="btn m-1">Click</label> */}
-                <div className="w-fit h-fit" tabIndex={0}>
-                <Tooltip title={user.displayName} placement="left-start">
-                    <img className="w-14 h-14 rounded-full border-2 object-cover object-center cursor-pointer" src={user?.photoURL || avatar} alt="" />
-                </Tooltip>
+                <div className="w-fit h-fit" tabIndex={1}>
+                    <Tooltip title={user.displayName} placement="left-start">
+                        <img className="w-14 h-14 rounded-full border-2 object-cover object-center cursor-pointer" src={user?.photoURL || avatar} alt="" />
+                    </Tooltip>
                 </div>
-                <div tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box z-10 dark:bg-gray-500">
-                <div className="p-8">
-                    <div className="bg-transparent text-primary ">
-                        <div className="flex gap-5 items-center min-w-[250px] bg-primary bg-opacity-10 p-2 rounded-lg cursor-pointer hover:scale-105 duration-100 shadow-lg">
-                            <img className="w-12 h-12 rounded-full border-2 border-primary object-cover object-center cursor-pointer" src={user?.photoURL || avatar} alt="" />  
-                            <p className="font-bold font-merri">{user?.displayName}</p>
-                        </div>
-                        <div className="bg-transparent">
-                            <div className="flex mx-2 mt-10 hover:bg-gray-200 rounded-lg p-2 duration-100 cursor-pointer gap-3 items-center font-bold font-merri text-sm" onClick={()=>navigate('/dashboard')}>
-                                <MdOutlineDashboard className="text-2xl"></MdOutlineDashboard>
-                                <p>Dashboard</p>
+                <div tabIndex={1} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box z-10 dark:bg-gray-500">
+                    <div className="p-8">
+                        <div className="bg-transparent text-primary ">
+                            <div className="flex gap-5 items-center min-w-[250px] bg-primary bg-opacity-10 p-2 rounded-lg cursor-pointer hover:scale-105 duration-100 shadow-lg">
+                                <img className="w-12 h-12 rounded-full border-2 border-primary object-cover object-center cursor-pointer" src={user?.photoURL || avatar} alt="" />  
+                                <p className="font-bold font-merri">{user?.displayName}</p>
                             </div>
-                            <div className="flex mx-2 hover:bg-gray-200 rounded-lg p-2 duration-100 cursor-pointer gap-3 items-center font-bold font-merri text-sm" onClick={logout}>
-                                <AiOutlineLogout className="text-2xl"></AiOutlineLogout>
-                                <p>Logout</p>
+                            <div className="bg-transparent">
+                                <div className="flex mx-2 mt-10 hover:bg-gray-200 rounded-lg p-2 duration-100 cursor-pointer gap-3 items-center font-bold font-merri text-sm" onClick={()=>navigate('/dashboard')}>
+                                    <MdOutlineDashboard className="text-2xl"></MdOutlineDashboard>
+                                    <p>Dashboard</p>
+                                </div>
+                                <div className="flex mx-2 hover:bg-gray-200 rounded-lg p-2 duration-100 cursor-pointer gap-3 items-center font-bold font-merri text-sm" onClick={logout}>
+                                    <AiOutlineLogout className="text-2xl"></AiOutlineLogout>
+                                    <p>Logout</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
               </div>}
             </div>}

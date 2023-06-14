@@ -1,4 +1,3 @@
-import { Parallax } from 'react-parallax';
 import thumb from '../../assets/thumb.jpg';
 import Marquee from 'react-fast-marquee';
 import { Rating } from '@mui/material';
@@ -92,7 +91,7 @@ const Testimonials = () => {
             <div className='bg-cover bg-center w-full bg-fixed' style={{backgroundImage:`url(${thumb})`}}>
             <div className='w-full py-44 bg-black bg-opacity-80'>
               <Marquee>
-                {testimonials.map((testimonial,index)=><div key={index} className='w-[300px] md:w-[380px] mx-20 p-5 rounded-xl h-[310px] md:h-[270px] border relative'>
+                {testimonials.map((testimonial,index)=><div key={index} className='w-[300px] md:w-[380px] mx-20 p-5 rounded-xl border relative'>
                   <div className='flex items-center gap-2'>
                     <img className='w-16 h-16 rounded-full border-2 border-white' src={testimonial.image} alt="" />
                     <div>
@@ -101,7 +100,7 @@ const Testimonials = () => {
                     </div>
                   </div>
                   <div className='mt-2'>
-                    <p className='text-sm text-white text-justify'>{testimonial.message}</p>
+                    <p className='text-sm text-white text-justify leading-4 h-[200px] overflow-auto mb-10'>{testimonial.message}</p>
                   </div>
                   <div className='w-fit absolute bottom-0 right-2'>
                     <Rating name="read-only" value={testimonial.rating} readOnly />

@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet-async";
 import Banner from "../shared/Banner";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxios";
-import { useEffect, useState } from "react";
 import { Fade, Zoom } from "react-awesome-reveal";
 import { AiFillPlusCircle } from "react-icons/ai";
 import useProfile from "../../hooks/useProfile";
@@ -11,6 +10,7 @@ import { MdOutlineCancel } from "react-icons/md";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
 const Instructors = () => {
@@ -30,9 +30,9 @@ const Instructors = () => {
     const {data:instructorClasses,isLoading} = useQuery({
         queryKey:['instructorClasses',currnet],
         queryFn:async()=>{
-            console.log('here');
+            // console.log('here');
             if(currnet){
-                console.log('here2');
+                // console.log('here2');
                 return axiosSecure(`https://newspro-server.vercel.app/instructor-classes/${currnet}`)
                 .then(res=>{
                     return res.data[0];
@@ -44,10 +44,10 @@ const Instructors = () => {
 
     const navigate = useNavigate();
     // console.log(instructors)
-    useEffect(()=>{
-        console.log(currnet);
-    },[currnet]);
-    console.log(instructorClasses);
+    // useEffect(()=>{
+    //     console.log(currnet);
+    // },[currnet]);
+    // console.log(instructorClasses);
 
     const fetchInstructorClasses = instructor =>{
         setCurrent(instructor.email);
